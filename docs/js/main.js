@@ -60,15 +60,20 @@ function initPizzaOrbit() {
   const hero   = document.getElementById('hero');
   const orbit  = document.querySelector('.pizza-orbit');
   if (!hero || !orbit) return;
+
+  // Cache elements and current dimensions once; update on resize
+  pizzas.forEach(p => { p.el = document.querySelector(p.id); });
   const toRad  = (deg) => deg * Math.PI / 180;
+  let hw = hero.offsetWidth;
+  let hh = hero.offsetHeight;
+  const onResize = () => { hw = hero.offsetWidth; hh = hero.offsetHeight; };
+  window.addEventListener('resize', onResize);
 
   let raf;
 
   function animate(ts) {
-    const hw = hero.offsetWidth;
-    const hh = hero.offsetHeight;
     pizzas.forEach(p => {
-      const el = document.querySelector(p.id);
+      const el = p.el;
       if (!el) return;
       const angle = toRad(p.angle + ts * p.speed * 1000);
       const rx = (hw * p.radius / 100) * 1.1;
@@ -116,6 +121,7 @@ function initWordSwitcher() {
   if (!words.length) return;
 
   let current = 0;
+  let cycleInterval;
   const INTERVAL = 2200;
   const wrap = document.getElementById('wordWrap');
 
@@ -167,11 +173,19 @@ function initWordSwitcher() {
     if (maxH > 10) wrap.style.height = (maxH + 12) + 'px';
   }
 
-  // Run after fonts confirmed loaded, then again for safety
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(measureAndSet);
+  // Measure off the main thread after fonts load; start cycling once measured
+  function startCycle() {
+    measureAndSet();
+    if (!cycleInterval) cycleInterval = setInterval(cycle, INTERVAL);
   }
-  setTimeout(measureAndSet, 300);
+  const schedule = typeof requestIdleCallback !== 'undefined'
+    ? (cb) => requestIdleCallback(cb, { timeout: 250 })
+    : (cb) => setTimeout(cb, 0);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => schedule(startCycle));
+  } else {
+    schedule(startCycle);
+  }
   setTimeout(measureAndSet, 800);
 
   // Recalculate on viewport resize so desktop/mobile breakpoints keep the word fully visible
@@ -1007,23 +1021,27 @@ function initWithoutGSAP() {
   initCocktailCarousel();
   initFallbackImages();
   // Basic pizza orbit with vanilla JS
-  const pizzas = ['#p1','#p2','#p3','#p4','#p5'];
+  const pizzas = [
+    { sel: '#p1', el: null, radius: 38, size: 220, speed: 0.000072, offset: 0 },
+    { sel: '#p2', el: null, radius: 42, size: 180, speed: 0.000088, offset: 72 },
+    { sel: '#p3', el: null, radius: 36, size: 260, speed: 0.000060, offset: 144 },
+    { sel: '#p4', el: null, radius: 40, size: 200, speed: 0.000080, offset: 216 },
+    { sel: '#p5', el: null, radius: 44, size: 150, speed: 0.000100, offset: 288 },
+  ];
   const hero = document.getElementById('hero');
   if (!hero) return;
-  const radii = [38, 42, 36, 40, 44];
-  const sizes = [220, 180, 260, 200, 150];
-  const speeds = [0.000072, 0.000088, 0.000060, 0.000080, 0.000100]; // 60% slower
-  const offsets = [0, 72, 144, 216, 288];
+  pizzas.forEach(p => { p.el = document.querySelector(p.sel); });
+  let hw = hero.offsetWidth;
+  let hh = hero.offsetHeight;
+  window.addEventListener('resize', () => { hw = hero.offsetWidth; hh = hero.offsetHeight; });
 
   function animate(ts) {
-    const hw = hero.offsetWidth;
-    const hh = hero.offsetHeight;
-    pizzas.forEach((sel, i) => {
-      const el = document.querySelector(sel);
+    pizzas.forEach((p) => {
+      const el = p.el;
       if (!el) return;
-      const angle = (offsets[i] + ts * speeds[i] * 1000) * Math.PI / 180;
-      const rx = (hw * radii[i] / 100) * 1.1;
-      const ry = (hh * radii[i] / 100) * 0.7;
+      const angle = (p.offset + ts * p.speed * 1000) * Math.PI / 180;
+      const rx = (hw * p.radius / 100) * 1.1;
+      const ry = (hh * p.radius / 100) * 0.7;
       const sizeW = el.offsetWidth;
       const sizeH = el.offsetHeight;
       const x = hw / 2 + rx * Math.cos(angle) - sizeW / 2;
