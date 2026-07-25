@@ -17,7 +17,13 @@
   <meta property="og:url" content="https://www.losclandestinospizzeria.es/productos.html">
   <meta property="og:image" content="https://www.losclandestinospizzeria.es/images/productos-hero-formaggi.jpg">
   <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:site_name" content="Los Clandestinos Pizzería Italiana">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ingredientes Italianos DOP | Los Clandestinos">
+  <meta name="twitter:description" content="Harinas, aceite de oliva, quesos DOP y embutidos italianos seleccionados para nuestra pizza artesanal.">
+  <meta name="twitter:image" content="https://www.losclandestinospizzeria.es/images/productos-hero-formaggi.jpg">
+  <meta name="theme-color" content="#0F0F0E">
 
   <!-- JSON-LD Breadcrumbs -->
   <script type="application/ld+json">
@@ -30,11 +36,12 @@
     ]
   }
   </script>
-  FAVICON
-  <link rel="icon" type="image/png" href="https://github.com/Albertohd88/LosClandestinospizzeria/blob/main/images/favicon0.png">
+  <link rel="icon" type="image/png" href="images/favicoin0.png" sizes="95x95">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
   <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
@@ -44,7 +51,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body data-page="products">
 
   <!-- ══════════════════════════════════════
        NAV
@@ -77,23 +84,23 @@
     </div>
 
     <a href="index.html" class="nav__logo-link" aria-label="Los Clandestinos — Home">
-      <img src="images/logo-white.svg" class="nav__logo" id="navLogo" alt="Los Clandestinos Pizzería Italiana" />
+      <img src="images/logo-white.svg" class="nav__logo" id="navLogo" alt="Los Clandestinos Pizzería Italiana" width="317" height="245" />
     </a>
 
     <div class="nav__right">
-      <a href="productos.html" class="nav__products-link" data-i18n="nav-products">NUESTROS PRODUCTOS</a>
-      <a href="https://losclandestinos.turbopos.es/" target="_blank" rel="noopener" class="nav__order-btn" data-i18n="nav-order">PEDIR ONLINE</a>
+      <a href="index.html" class="nav__home-link" data-i18n="nav-home">INICIO</a>
     </div>
 
   </nav>
 
+  <main>
   <!-- ══════════════════════════════════════
        HERO — Productos
   ══════════════════════════════════════ -->
   <section class="productos-hero" aria-label="Nuestros Productos">
 
     <div class="productos-hero__bg" aria-hidden="true">
-      <img src="images/productos-hero-formaggi.jpg" alt="" loading="eager" />
+      <img src="images/web/productos-hero-formaggi-480.webp" srcset="images/web/productos-hero-formaggi-480.webp 480w, images/web/productos-hero-formaggi-768.webp 768w, images/web/productos-hero-formaggi-1280.webp 1280w" sizes="100vw" alt="" width="1600" height="1200" fetchpriority="high" decoding="async" />
     </div>
 
     <div class="productos-hero__content">
@@ -130,11 +137,11 @@
     <div class="product-row product-row--reverse" data-index="1">
       <div class="product-text">
         <span class="product-num">01</span>
-        <h2 class="product-title product-title--with-badge" data-i18n="prod-p1-title">Harina<br>Maestra<img src="images/logo-farina-giovanna.jpg" alt="Molino Dalla Giovanna" class="product-title__badge" /></h2>
+        <h2 class="product-title product-title--with-badge"><span data-i18n="prod-p1-title">Harina<br>Maestra</span><img src="images/web/logo-farina-giovanna-160.webp" alt="Molino Dalla Giovanna" class="product-title__badge" width="311" height="311" loading="lazy" decoding="async" /></h2>
         <p class="product-desc" data-i18n="prod-p1-desc">La auténtica harina Pizzajuolo, aprobada por la AVPN (Associazione Verace Pizza Napoletana), realza las excelencias de la pizza napolitana, ofreciendo una corteza perfectamente desarrollada y dorada, una masa suave, elástica y fácilmente plegable, además de realzar el sabor de los ingredientes. como el tomate, la mozzarella y el aceite de oliva. Producido por la reconocida marca DallaGiovanna, es la elección favorita de los maestros pizzeros que buscan autenticidad y calidad para crear auténticas experiencias culinarias napolitanas.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/farine.png" alt="Harinas italianas tipo 00" loading="lazy" />
+        <img src="images/web/farine-480.webp" srcset="images/web/farine-480.webp 480w, images/web/farine-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Harinas italianas tipo 00" width="800" height="800" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -146,7 +153,7 @@
         <p class="product-desc" data-i18n="prod-p2-desc">De la provincia de Cádiz, con el carácter del sur. Prensado en frío, de cosecha propia, con una acidez mínima que realza sin tapar. El acabado perfecto para cualquier pizza o tabla — y la razón por la que el primer bocado siempre sorprende.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/olio.png" alt="Aceite de oliva virgen extra" loading="lazy" />
+        <img src="images/web/olio-480.webp" srcset="images/web/olio-480.webp 480w, images/web/olio-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Aceite de oliva virgen extra" width="800" height="800" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -158,7 +165,7 @@
         <p class="product-desc" data-i18n="prod-p3-desc">Bufala Campana, Parmigiano Reggiano, Gorgonzola. Tres denominaciones de origen que no necesitan presentación. Los seleccionamos en origen, en su punto exacto de maduración. Porque en una buena pizza, el queso no es un ingrediente más: es el argumento.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/formaggi.png" alt="Quesos italianos DOP" loading="lazy" />
+        <img src="images/web/formaggi-480.webp" srcset="images/web/formaggi-480.webp 480w, images/web/formaggi-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Quesos italianos DOP" width="800" height="800" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -170,7 +177,7 @@
         <p class="product-desc" data-i18n="prod-p4-desc">Los mejores embutidos encuentra en las mejores mesas de la familias italianas. Mortadella de Bologna, bresaola curada, speck di Angus y crudo di Parma. Producto auténtico, traído directamente de Italia. Los mismos que encuentras en las mejores tablas de Milán o Roma — ahora en La Línea.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/embutidos.png" alt="Embutidos italianos" loading="lazy" />
+        <img src="images/web/embutidos-480.webp" srcset="images/web/embutidos-480.webp 480w, images/web/embutidos-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Embutidos italianos" width="800" height="800" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -204,13 +211,16 @@
             </div>
           </div>
 
-          <div class="loc-card">
-            <div class="loc-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div>
+          <div class="loc-card loc-card--hours">
+            <div class="loc-hours-header">
+              <div class="loc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
               <strong data-i18n="loc-hours-label">Horario</strong>
-              <p data-i18n="loc-hours-text">Dom: 13:00–15:30, 19:30–23:30<br>Lun: Cerrado<br>Mar: 19:00–23:00<br>Mié: 19:30–23:30<br>Jue: 13:00–15:30, 19:30–23:30<br>Vie: 13:00–15:30, 19:30–23:30<br>Sáb: 13:00–15:30, 19:30–23:30</p>
+            </div>
+            <div class="hours-wrap">
+              <p class="hours-fallback" data-i18n="loc-hours-text">Lun: Cerrado<br>Mar–Dom: 19:30–23:30</p>
+              <div class="hours-dynamic" data-hours-root hidden></div>
             </div>
           </div>
 
@@ -234,12 +244,22 @@
             </div>
           </div>
 
+          <div class="loc-card loc-card--facebook">
+            <div class="loc-icon loc-icon--facebook" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M14 8h3V4h-3c-3.31 0-6 2.69-6 6v2H5v4h3v8h4v-8h3l1-4h-4v-2c0-1.1.9-2 2-2z"/></svg>
+            </div>
+            <div>
+              <strong data-i18n="loc-facebook-label">Facebook</strong>
+              <a href="https://www.facebook.com/p/Los-Clandestinos-Pizzeria-Italiana-100057105144302/" target="_blank" rel="noopener" class="loc-facebook" data-i18n="loc-facebook-link">Síguenos en Facebook</a>
+            </div>
+          </div>
+
           <div class="loc-btns">
             <a href="tel:+34856941295" class="loc-btn loc-btn--call">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
               <span data-i18n="loc-btn-call">Llamar ahora</span>
             </a>
-            <a href="https://www.google.com/maps/place/Pizzeria+Los+Clandestinos/@36.1606325,-5.3491208,17z" target="_blank" rel="noopener" class="loc-btn loc-btn--maps">
+            <a href="https://maps.app.goo.gl/AvKgQvo6EFTS1P2z6" target="_blank" rel="noopener" class="loc-btn loc-btn--maps">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <span data-i18n="loc-btn-maps">Cómo llegar</span>
             </a>
@@ -266,6 +286,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ══════════════════════════════════════
        FOOTER

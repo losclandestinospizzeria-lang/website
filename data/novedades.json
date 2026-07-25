@@ -1,0 +1,38 @@
+[
+  {
+    "id": "identificador-unico",
+    "active": true,
+    "startDate": "2026-07-01",
+    "endDate": "2026-07-24",
+    "order": 10,
+    "images": [
+      {
+        "src": "images/web/cocktail-americano-768.webp",
+        "alt": {
+          "es": "Cocktail americano",
+          "en": "American cocktail"
+        }
+      }
+    ],
+    "content": {
+      "es": {
+        "title": "Nuevos Coctails",
+        "subtitle": "Desde la barra hasta a ti",
+        "description": "Nuestra nueva seleccion de cocktails te espera en el restaurante, pidelos en barra o te los llevamos a la mesa."
+      },
+      "en": {
+        "title": "New Cocktails",
+        "subtitle": "From the bar to your table",
+        "description": "Our new selection of cocktails is waiting for you at the restaurant, order them at the bar or we'll bring them to your table."
+      }
+    },
+    "cta": {
+      "active": false,
+      "url": "https://losclandestinos.turbopos.es/",
+      "label": {
+        "es": "Haz tu pedido",
+        "en": "Order now"
+      }
+    }
+  }
+]

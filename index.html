@@ -7,8 +7,9 @@
   <meta name="description" content="Pizzería italiana auténtica en La Línea de la Concepción, junto a Gibraltar. Pizza artesanal al horno de piedra con ingredientes italianos DOP. Calle Carboneros 5 · Reservas: +34 856 94 12 95.">
   <link rel="canonical" href="https://www.losclandestinospizzeria.es/">
   
-  <link rel="icon" href="https://raw.githubusercontent.com/Albertohd88/LosClandestinospizzeria/main/images/faviaoin0.png" type="image/png" sizes="96x96">
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/Albertohd88/LosClandestinospizzeria/main/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicoin0.png" type="image/png" sizes="95x95">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#C8202A">
 
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="ES-CA">
@@ -28,8 +29,9 @@
   <meta name="twitter:description" content="Pizza artesanal al horno de piedra con ingredientes italianos DOP, junto a Gibraltar.">
   <meta name="twitter:image" content="https://www.losclandestinospizzeria.es/images/pizza-whole.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
@@ -64,7 +66,7 @@
       "latitude": 36.1606325,
       "longitude": -5.3491208
     },
-    "hasMap": "https://www.google.com/maps/place/Pizzeria+Los+Clandestinos/@36.1606325,-5.3491208,17z",
+    "hasMap": "https://maps.app.goo.gl/AvKgQvo6EFTS1P2z6",
     "areaServed": [
       { "@type": "City", "name": "La Línea de la Concepción" },
       { "@type": "Place", "name": "Gibraltar" }
@@ -73,37 +75,11 @@
     "sameAs": [
       "https://www.instagram.com/losclandestinospizzeria/",
       "https://www.facebook.com/p/Los-Clandestinos-Pizzeria-Italiana-100057105144302/"
-    ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Tuesday",
-        "opens": "19:00",
-        "closes": "23:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Wednesday",
-        "opens": "19:30",
-        "closes": "23:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "13:00",
-        "closes": "15:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "19:30",
-        "closes": "23:30"
-      }
     ]
   }
   </script>
 </head>
-<body>
+<body data-page="home">
 
   <nav class="nav" aria-label="Main navigation">
 
@@ -133,37 +109,37 @@
     </div>
 
     <a href="index.html" class="nav__logo-link" aria-label="Los Clandestinos — Home">
-      <img src="images/logo-white.svg" class="nav__logo" id="navLogo" alt="Los Clandestinos Pizzería Italiana" />
+      <img src="images/logo-white.svg" class="nav__logo" id="navLogo" alt="Los Clandestinos Pizzería Italiana" width="317" height="245" />
     </a>
 
     <div class="nav__right">
       <a href="productos.html" class="nav__products-link" data-i18n="nav-products">NUESTROS PRODUCTOS</a>
-      <a href="https://losclandestinos.turbopos.es/" target="_blank" rel="noopener" class="nav__order-btn" data-i18n="nav-order">PEDIR ONLINE</a>
     </div>
 
   </nav>
 
+  <main>
   <section class="hero" id="hero" aria-label="Hero">
 
     <div class="hero__bg" aria-hidden="true">
-      <img src="images/hero-bg.jpg" alt="" fetchpriority="high" />
+      <img src="images/web/hero-bg-480.webp" srcset="images/web/hero-bg-480.webp 480w, images/web/hero-bg-768.webp 768w, images/web/hero-bg-1080.webp 1080w" sizes="100vw" alt="" width="1080" height="1620" fetchpriority="high" decoding="async" />
     </div>
 
     <div class="pizza-orbit" aria-hidden="true">
-      <div class="pizza-item" id="p1" data-layer="1" style="width:310px;height:310px">
-        <img src="images/pizza1.jpg" alt="Pizza Quattro Formaggi artesanal al horno de piedra" />
+      <div class="pizza-item" id="p1" data-layer="1" style="--pizza-w:310px;--pizza-h:310px">
+        <img src="images/web/pizza1-480.webp" alt="Pizza Quattro Formaggi artesanal al horno de piedra" width="401" height="390" decoding="async" />
       </div>
-      <div class="pizza-item" id="p2" data-layer="2" style="width:255px;height:255px">
-        <img src="images/pizza2.jpg" alt="Pizza de anchoas artesanal" />
+      <div class="pizza-item" id="p2" data-layer="2" style="--pizza-w:255px;--pizza-h:255px">
+        <img src="images/web/pizza2-480.webp" alt="Pizza de anchoas artesanal" width="375" height="394" decoding="async" />
       </div>
-      <div class="pizza-item" id="p3" data-layer="3" style="width:365px;height:365px">
-        <img src="images/pizza3.jpg" alt="Pizza con prosciutto italiano" />
+      <div class="pizza-item" id="p3" data-layer="3" style="--pizza-w:365px;--pizza-h:365px">
+        <img src="images/web/pizza3-480.webp" alt="Pizza con prosciutto italiano" width="396" height="391" decoding="async" />
       </div>
-      <div class="pizza-item pizza-item--transparent" id="p4" data-layer="4" style="width:280px;height:280px">
-        <img src="images/pizza4.webp" alt="Pizza Refugio, nueva especialidad de Los Clandestinos" />
+      <div class="pizza-item pizza-item--transparent" id="p4" data-layer="4" style="--pizza-w:280px;--pizza-h:280px">
+        <img src="images/web/pizza4-480.webp" alt="Pizza Refugio, nueva especialidad de Los Clandestinos" width="500" height="446" fetchpriority="high" decoding="async" />
       </div>
-      <div class="pizza-item" id="p5" data-layer="5" style="width:210px;height:210px">
-        <img src="images/pizza5.jpg" alt="Pizza Capricciosa artesanal" />
+      <div class="pizza-item" id="p5" data-layer="5" style="--pizza-w:210px;--pizza-h:210px">
+        <img src="images/web/pizza5-480.webp" alt="Pizza Capricciosa artesanal" width="399" height="404" decoding="async" />
       </div>
     </div>
 
@@ -175,20 +151,41 @@
         <span class="hero__word hero__word--active" data-word="JAMÓN" data-i18n="word-0">JAMÓN</span>
         <span class="hero__word hero__word--enter"  data-word="QUESO" data-i18n="word-1">QUESO</span>
         <span class="hero__word hero__word--enter"  data-word="ANCHOAS" data-i18n="word-2">ANCHOAS</span>
+        <span class="hero__word hero__word--enter"  data-word="PIZZA" data-i18n="word-3">PIZZA</span>
       </div>
     </div>
 
-    <div class="pizza-label label-dop" aria-hidden="true">
-      "DOP" CHEESE
-      <svg class="label-arrow label-arrow--dop" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 5 Q 30 5 35 30" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M30 25 L35 30 L28 30" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="pizza-label label-refugio" id="btnRefugio" role="button" tabindex="0" aria-pressed="false" data-i18n="label-refugio-text">
-      NUEVA PIZZA REFUGIO
+    <div class="hero__actions">
+      <a href="https://losclandestinos.turbopos.es/" target="_blank" rel="noopener" class="hero__order-btn" data-i18n="hero-order">HAZ TU PEDIDO</a>
+      <p class="hero__phone-line">
+        <span data-i18n="hero-call-prefix">o llámanos al</span>
+        <a href="tel:+34856941295">+34 856 94 12 95</a>
+      </p>
     </div>
 
+  </section>
+
+  <section class="reviews-section" aria-label="Customer reviews">
+    <div class="reviews-inner">
+      <div class="reviews-summary">
+        <strong class="reviews-count">750+</strong>
+        <p class="reviews-title" data-i18n="reviews-title">valoraciones entre<br>Google y Just Eat</p>
+      </div>
+      <div class="reviews-platforms" aria-label="Google and Just Eat reviews">
+        <div class="review-platform">
+          <div class="review-logo review-logo--google" role="img" aria-label="Google">
+            <span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g">g</span><span class="google-l">l</span><span class="google-e">e</span>
+          </div>
+        </div>
+        <div class="review-platform">
+          <div class="review-logo review-logo--justeat" role="img" aria-label="Just Eat">
+            <svg viewBox="0 0 184 36" role="img" aria-hidden="true" focusable="false">
+              <text x="92" y="27" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="27" font-weight="900" letter-spacing="-1">JUST EAT</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="ticker-section" aria-label="Los mejores ingredientes">
@@ -204,10 +201,20 @@
     </div>
   </section>
 
+  <section class="news-section" id="news" aria-labelledby="newsTitle" hidden>
+    <div class="news-section__inner">
+      <div class="news-section__header">
+        <span class="news-section__eyebrow" data-i18n="news-eyebrow">Novedades · Novità</span>
+        <h2 class="news-section__title" id="newsTitle" data-i18n="news-title">LO NUEVO EN LOS CLANDESTINOS</h2>
+      </div>
+      <div class="news-list" id="newsList"></div>
+    </div>
+  </section>
+
   <section class="about-section" id="about" aria-label="About Los Clandestinos">
 
     <div class="about-collage" aria-hidden="true">
-      <img src="images/about-collage-compressed.jpg" alt="" loading="lazy" />
+      <img src="images/web/about-collage-compressed-480.webp" srcset="images/web/about-collage-compressed-480.webp 480w, images/web/about-collage-compressed-768.webp 768w" sizes="(max-width: 900px) 100vw, 50vw" alt="" width="1080" height="1728" loading="lazy" decoding="async" />
     </div>
 
     <div class="about-overlay" aria-hidden="true"></div>
@@ -228,7 +235,7 @@
         <span data-i18n="tag-0">Horno de piedra</span>
         <span data-i18n="tag-1">Masa artesanal</span>
         <span data-i18n="tag-2">Ingredientes DOP</span>
-        <span data-i18n="tag-3">Abierto desde 2023</span>
+        <span data-i18n="tag-3">Abierto desde 2020</span>
       </div>
     </div>
 
@@ -256,7 +263,7 @@
         <p class="product-desc" data-i18n="prod-1-desc">Prosciutto di Parma que se deshace en la boca, mozzarella di bufala de cremosidad delicada, rúcula fresca con su punto amargo justo, y tomates cherry que estallan dulcemente en cada bocado.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/product-1.webp" alt="Saltimbocca alla Parma con prosciutto di Parma y mozzarella di bufala · Los Clandestinos, La Línea de la Concepción" loading="lazy" style="width: 700px; object-fit: contain" />
+        <img src="images/web/product-1-480.webp" srcset="images/web/product-1-480.webp 480w, images/web/product-1-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Saltimbocca alla Parma con prosciutto di Parma y mozzarella di bufala · Los Clandestinos, La Línea de la Concepción" width="800" height="659" loading="lazy" decoding="async" style="width: 700px; object-fit: contain" />
       </div>
     </div>
 
@@ -267,7 +274,7 @@
         <p class="product-desc" data-i18n="prod-2-desc">Capas de pasta fresca, ragú de cocción lenta y bechamel cremosa. La lasaña como debe ser: generosa, honesta y sin atajos. El plato que te reconcilia con el mundo.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/product-3.webp" alt="Lasaña artesanal italiana · Los Clandestinos, pizzería en La Línea de la Concepción" loading="lazy" />
+        <img src="images/web/product-3-480.webp" srcset="images/web/product-3-480.webp 480w, images/web/product-3-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Lasaña artesanal italiana · Los Clandestinos, pizzería en La Línea de la Concepción" width="800" height="600" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -278,7 +285,7 @@
         <p class="product-desc" data-i18n="prod-3-desc">Cinco quesos con denominación de origen, seleccionados para recorrer Italia en un solo bocado. Los acompañamos con nueces tostadas, miel artesanal y tomates cherry desecados que aportan ese punto dulce y concentrado que lo cambia todo. Para compartir — o no.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/product-2.webp" alt="Tabla de quesos italianos DOP · Los Clandestinos, La Línea de la Concepción" loading="lazy" />
+        <img src="images/web/product-2-480.webp" srcset="images/web/product-2-480.webp 480w, images/web/product-2-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Tabla de quesos italianos DOP · Los Clandestinos, La Línea de la Concepción" width="800" height="600" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -289,7 +296,7 @@
         <p class="product-desc" data-i18n="prod-4-desc">Crocante exterior que cede ante un corazón de ricotta artesanal, suave y aterciopelado. Pepitas de chocolate y pistacho tostado completan esta oda a la tradición siciliana. Un final irresistible que merece su propio espacio.</p>
       </div>
       <div class="product-img-wrap">
-        <img src="images/product-4.webp" alt="Cannoli sicilianos caseros · Los Clandestinos, pizzería italiana en La Línea" loading="lazy" />
+        <img src="images/web/product-4-480.webp" srcset="images/web/product-4-480.webp 480w, images/web/product-4-768.webp 768w" sizes="(max-width: 768px) calc(100vw - 3rem), 50vw" alt="Cannoli sicilianos caseros · Los Clandestinos, pizzería italiana en La Línea" width="800" height="659" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -307,7 +314,7 @@
 
         <div class="cocktail-card">
           <div class="cocktail-img-wrap">
-            <img src="images/cocktail-spritz.jpg" alt="Aperol Spritz" loading="lazy" />
+            <img src="images/web/cocktail-spritz-480.webp" srcset="images/web/cocktail-spritz-480.webp 480w, images/web/cocktail-spritz-768.webp 768w" sizes="(max-width: 900px) min(100vw - 3rem, 560px), 25vw" alt="Aperol Spritz" width="800" height="800" loading="lazy" decoding="async" />
           </div>
           <div class="cocktail-info">
             <span class="cocktail-num">01</span>
@@ -318,7 +325,7 @@
 
         <div class="cocktail-card">
           <div class="cocktail-img-wrap">
-            <img src="images/cocktail-negroni.jpg" alt="Negroni" loading="lazy" />
+            <img src="images/web/cocktail-negroni-480.webp" srcset="images/web/cocktail-negroni-480.webp 480w, images/web/cocktail-negroni-768.webp 768w" sizes="(max-width: 900px) min(100vw - 3rem, 560px), 25vw" alt="Negroni" width="800" height="800" loading="lazy" decoding="async" />
           </div>
           <div class="cocktail-info">
             <span class="cocktail-num">02</span>
@@ -329,7 +336,7 @@
 
         <div class="cocktail-card">
           <div class="cocktail-img-wrap">
-            <img src="images/cocktail-americano.jpg" alt="Americano" loading="lazy" />
+            <img src="images/web/cocktail-americano-480.webp" srcset="images/web/cocktail-americano-480.webp 480w, images/web/cocktail-americano-768.webp 768w" sizes="(max-width: 900px) min(100vw - 3rem, 560px), 25vw" alt="Americano" width="800" height="800" loading="lazy" decoding="async" />
           </div>
           <div class="cocktail-info">
             <span class="cocktail-num">03</span>
@@ -340,7 +347,7 @@
 
         <div class="cocktail-card">
           <div class="cocktail-img-wrap">
-            <img src="images/cocktail-espresso-martini.jpg" alt="Espresso Martini" loading="lazy" />
+            <img src="images/web/cocktail-espresso-martini-480.webp" srcset="images/web/cocktail-espresso-martini-480.webp 480w, images/web/cocktail-espresso-martini-768.webp 768w" sizes="(max-width: 900px) min(100vw - 3rem, 560px), 25vw" alt="Espresso Martini" width="800" height="800" loading="lazy" decoding="async" />
           </div>
           <div class="cocktail-info">
             <span class="cocktail-num">04</span>
@@ -364,46 +371,13 @@
 
   </section>
 
-  <section class="reviews-section" aria-label="Customer rankings">
-    <div class="reviews-inner">
-      <div class="reviews-copy">
-        <span class="reviews-eyebrow" data-i18n="reviews-eyebrow">Reseñas · Rankings</span>
-        <h2 class="reviews-title" data-i18n="reviews-title">Valorada por quienes siempre vuelven</h2>
-      </div>
-
-      <div class="reviews-grid" aria-label="Google and Just Eat rankings">
-        <article class="review-card">
-          <div class="review-logo review-logo--google" aria-label="Google">
-            <span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g">g</span><span class="google-l">l</span><span class="google-e">e</span>
-          </div>
-          <div class="review-stars" aria-label="5 out of 5 stars">
-            <span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span>
-          </div>
-          <p data-i18n="reviews-google">Ranking Google</p>
-        </article>
-
-        <article class="review-card review-card--orange">
-          <div class="review-logo review-logo--justeat" aria-label="Just Eat">
-            <svg viewBox="0 0 184 36" role="img" aria-hidden="true" focusable="false">
-              <text x="0" y="27" font-family="Arial Black, Arial, sans-serif" font-size="27" font-weight="900" letter-spacing="-1">JUST EAT</text>
-            </svg>
-          </div>
-          <div class="review-stars" aria-label="5 out of 5 stars">
-            <span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span>
-          </div>
-          <p data-i18n="reviews-justeat">Ranking Just Eat</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <section class="location-section" id="contact" aria-label="Find us — location and hours">
     <div class="location-inner">
 
       <div class="location-head" style="margin: 30px 0px 80px">
         <span class="location-eyebrow" data-i18n="loc-eyebrow">Encuéntranos · Find Us</span>
         <h2 class="location-title">
-          <span style="font-size: 80px">CALLE CARBONEROS 5,</span>
+          <span class="location-title__address">CALLE CARBONEROS 5,</span>
           <span class="loc-outline">LA LÍNEA</span>
         </h2>
       </div>
@@ -422,13 +396,16 @@
             </div>
           </div>
 
-          <div class="loc-card">
-            <div class="loc-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div>
+          <div class="loc-card loc-card--hours">
+            <div class="loc-hours-header">
+              <div class="loc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
               <strong data-i18n="loc-hours-label">Horario</strong>
-              <p data-i18n="loc-hours-text">Dom: 13:00–15:30, 19:30–23:30<br>Lun: Cerrado<br>Mar: 19:00–23:00<br>Mié: 19:30–23:30<br>Jue: 13:00–15:30, 19:30–23:30<br>Vie: 13:00–15:30, 19:30–23:30<br>Sáb: 13:00–15:30, 19:30–23:30</p>
+            </div>
+            <div class="hours-wrap">
+              <p class="hours-fallback" data-i18n="loc-hours-text">Lun: Cerrado<br>Mar–Dom: 19:30–23:30</p>
+              <div class="hours-dynamic" data-hours-root hidden></div>
             </div>
           </div>
 
@@ -452,12 +429,39 @@
             </div>
           </div>
 
+          <div class="loc-card loc-card--facebook">
+            <div class="loc-icon loc-icon--facebook" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M14 8h3V4h-3c-3.31 0-6 2.69-6 6v2H5v4h3v8h4v-8h3l1-4h-4v-2c0-1.1.9-2 2-2z"/></svg>
+            </div>
+            <div>
+              <strong data-i18n="loc-facebook-label">Facebook</strong>
+              <a href="https://www.facebook.com/p/Los-Clandestinos-Pizzeria-Italiana-100057105144302/" target="_blank" rel="noopener" class="loc-facebook" data-i18n="loc-facebook-link">Síguenos en Facebook</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="loc-right">
+          <div class="loc-map">
+            <!-- Map loaded lazily via JS after user scroll -->
+            <iframe
+              id="mapFrame"
+              data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d798.2!2d-5.3491208!3d36.1606325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0cc118c945d767%3A0xda6fc15326eb1322!2sPizzeria%20Los%20Clandestinos!5e0!3m2!1sen!2ses!4v1714300000000!5m2!1sen!2ses"
+              src=""
+              width="100%"
+              height="400"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Los Clandestinos Pizzería — Calle Carboneros 5, La Línea de la Concepción">
+            </iframe>
+          </div>
+
           <div class="loc-btns">
             <a href="tel:+34856941295" class="loc-btn loc-btn--call">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
               <span data-i18n="loc-btn-call">Llamar ahora</span>
             </a>
-            <a href="https://www.google.com/maps/place/Pizzeria+Los+Clandestinos/@36.1606325,-5.3491208,17z" target="_blank" rel="noopener" class="loc-btn loc-btn--maps">
+            <a href="https://maps.app.goo.gl/AvKgQvo6EFTS1P2z6" target="_blank" rel="noopener" class="loc-btn loc-btn--maps">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <span data-i18n="loc-btn-maps">Cómo llegar</span>
             </a>
@@ -466,24 +470,12 @@
               <span data-i18n="loc-btn-order">PIDE AHORA</span>
             </a>
           </div>
-
-        </div>
-
-        <div class="loc-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d798.2!2d-5.3491208!3d36.1606325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0cb5c8c6afb4f7%3A0xe2dc0ed8f1c7e74a!2sPizzeria%20Los%20Clandestinos!5e0!3m2!1sen!2ses!4v1714300000000!5m2!1sen!2ses"
-            width="100%" height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Los Clandestinos Pizzería — Calle Carboneros 5, La Línea de la Concepción">
-          </iframe>
         </div>
 
       </div>
     </div>
   </section>
+  </main>
 
   <footer class="footer" aria-label="Contact and location">
     <p class="footer__bottom" data-i18n="footer-bottom">

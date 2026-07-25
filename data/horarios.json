@@ -1,0 +1,15 @@
+{
+  "schema": {
+    "timezone": "Europe/Madrid",
+    "notes": "Orari locali. dayOfWeek in inglese per schema.org."
+  },
+  "weekly": {
+    "monday": { "lunch_start": "", "lunch_end": "", "dinner_start": "", "dinner_end": "" },
+    "tuesday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "wednesday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "thursday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "friday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "saturday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "sunday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" }
+  }
+}

@@ -7,8 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // These run immediately — no GSAP dependency
   initCtaBanner();
+  initNews();
+  initHorarios();
   initLangSwitcher();
   initLogoColorSwitch();
+
+  // Set up the map observer after the first paint, like Gusto
+  requestAnimationFrame(initLazyMap);
 
   // Wait for GSAP to load (deferred scripts)
   const waitForGSAP = setInterval(() => {
@@ -36,9 +41,7 @@ function init() {
   initCrunchParallax();
   initProductSection();
   initCocktailCarousel();
-  initLogoColorSwitch();
   initFallbackImages();
-  initLangSwitcher();
 }
 
 /* =============================================
@@ -57,71 +60,53 @@ function initPizzaOrbit() {
 
   const hero   = document.getElementById('hero');
   const orbit  = document.querySelector('.pizza-orbit');
-  const cx = () => hero.offsetWidth  / 2;
-  const cy = () => hero.offsetHeight / 2;
+  if (!hero || !orbit) return;
   const toRad  = (deg) => deg * Math.PI / 180;
 
   let raf;
 
   function animate(ts) {
+    const hw = hero.offsetWidth;
+    const hh = hero.offsetHeight;
     pizzas.forEach(p => {
       const el = document.querySelector(p.id);
       if (!el) return;
       const angle = toRad(p.angle + ts * p.speed * 1000);
-      const hw = hero.offsetWidth;
-      const hh = hero.offsetHeight;
       const rx = (hw * p.radius / 100) * 1.1;
       const ry = (hh * p.radius / 100) * 0.7;
-      const x  = cx() + rx * Math.cos(angle) - p.size / 2;
-      const y  = cy() + ry * Math.sin(angle) - p.size / 2;
-      el.style.left = x + 'px';
-      el.style.top  = y + 'px';
+      const sizeW = el.offsetWidth;
+      const sizeH = el.offsetHeight;
+      const x  = hw / 2 + rx * Math.cos(angle) - sizeW / 2;
+      const y  = hh / 2 + ry * Math.sin(angle) - sizeH / 2;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     });
-    raf = requestAnimationFrame(animate);
+    if (running) raf = requestAnimationFrame(animate);
   }
 
-  requestAnimationFrame(animate);
+  let running = false;
+  const start = () => {
+    if (running) return;
+    running = true;
+    raf = requestAnimationFrame(animate);
+  };
+  const stop = () => {
+    running = false;
+    cancelAnimationFrame(raf);
+  };
+  start();
 
   // Pause when hero leaves viewport (perf)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) requestAnimationFrame(animate);
-      else cancelAnimationFrame(raf);
+      if (e.isIntersecting) start();
+      else stop();
     });
   });
   observer.observe(hero);
 
   // ── Label hover: spotlight a specific layer ──────────────────────────
-  function spotlight(layerNum) {
-    orbit.classList.add('pizza-orbit--hovering');
-    document.querySelectorAll('.pizza-item').forEach(el => {
-      el.classList.remove('pizza-item--spotlight');
-      if (parseInt(el.dataset.layer) === layerNum) {
-        el.classList.add('pizza-item--spotlight');
-      }
-    });
-  }
-
-  function clearSpotlight() {
-    orbit.classList.remove('pizza-orbit--hovering');
-    document.querySelectorAll('.pizza-item').forEach(el => {
-      el.classList.remove('pizza-item--spotlight');
-    });
-  }
-
   // DOP Cheese label → hover spotlights Layer 1
-  const dopLabel = document.querySelector('.label-dop');
-  if (dopLabel) {
-    dopLabel.addEventListener('mouseenter', () => spotlight(1));
-    dopLabel.addEventListener('mouseleave', clearSpotlight);
-  }
-
   // OUR NEW REFUGIO button → hover spotlights Layer 4 (same as DOP CHEESE)
-  const refugioBtn = document.getElementById('btnRefugio');
-  if (refugioBtn) {
-    refugioBtn.addEventListener('mouseenter', () => spotlight(4));
-    refugioBtn.addEventListener('mouseleave', () => clearSpotlight());
-  }
 }
 
 /* =============================================
@@ -142,8 +127,6 @@ function initWordSwitcher() {
   // Size wrapper — use a probe that inherits computed styles from the real words
   function measureAndSet() {
     const probe = document.createElement('span');
-    // Copy computed style from first word so font/size/spacing are identical
-    const wCs = window.getComputedStyle(words[0]);
     probe.style.cssText = [
       'position:fixed',
       'top:-9999px',
@@ -151,18 +134,30 @@ function initWordSwitcher() {
       'visibility:hidden',
       'pointer-events:none',
       'white-space:nowrap',
-      'font-family:' + wCs.fontFamily,
-      'font-size:'   + wCs.fontSize,
-      'font-weight:' + wCs.fontWeight,
-      'letter-spacing:' + wCs.letterSpacing,
-      'line-height:' + wCs.lineHeight,
-      'text-transform:' + wCs.textTransform,
     ].join(';');
     document.body.appendChild(probe);
 
     let maxW = 0;
     let maxH = 0;
     words.forEach(w => {
+      // Each word may have its own decoration (e.g. PIZZA has a white stroke)
+      const wCs = window.getComputedStyle(w);
+      probe.style.cssText = [
+        'position:fixed',
+        'top:-9999px',
+        'left:-9999px',
+        'visibility:hidden',
+        'pointer-events:none',
+        'white-space:nowrap',
+        'font-family:' + wCs.fontFamily,
+        'font-size:'   + wCs.fontSize,
+        'font-weight:' + wCs.fontWeight,
+        'letter-spacing:' + wCs.letterSpacing,
+        'line-height:' + wCs.lineHeight,
+        'text-transform:' + wCs.textTransform,
+        '-webkit-text-stroke:' + wCs.webkitTextStroke,
+        'text-shadow:' + wCs.textShadow,
+      ].join(';');
       probe.textContent = w.textContent.trim();
       maxW = Math.max(maxW, probe.offsetWidth);
       maxH = Math.max(maxH, probe.offsetHeight);
@@ -170,7 +165,7 @@ function initWordSwitcher() {
     document.body.removeChild(probe);
 
     if (maxW > 30) wrap.style.width  = maxW + 'px';
-    if (maxH > 10) wrap.style.height = (maxH + 4) + 'px';
+    if (maxH > 10) wrap.style.height = (maxH + 12) + 'px';
   }
 
   // Run after fonts confirmed loaded, then again for safety
@@ -179,6 +174,13 @@ function initWordSwitcher() {
   }
   setTimeout(measureAndSet, 300);
   setTimeout(measureAndSet, 800);
+
+  // Recalculate on viewport resize so desktop/mobile breakpoints keep the word fully visible
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(measureAndSet, 150);
+  });
 
   function cycle() {
     const prev = words[current];
@@ -336,7 +338,7 @@ function initPizzaReveal() {
   let pizzaImg = new Image();
   // Use a data URI pizza placeholder until real image loads
   pizzaImg.crossOrigin = 'anonymous';
-  pizzaImg.src = 'images/pizza-whole.jpg';
+  pizzaImg.src = 'images/web/pizza1-480.webp';
 
   // Resize canvas to container
   function resize() {
@@ -614,13 +616,279 @@ function initCtaBanner() {
   banner.innerHTML = `
     <span class="cta-banner__eyebrow" data-i18n="cta-eyebrow">${t['cta-eyebrow'] || 'Ingredientes de Italia · Directamente a ti'}</span>
     <h2 class="cta-banner__title" data-i18n="cta-title">${t['cta-title'] || '¿Listo para saborear la autenticidad?'}</h2>
-    <p class="cta-banner__sub" data-i18n="cta-sub">${t['cta-sub'] || 'Llámanos y disfruta de los mejores ingredientes italianos esta noche.'}</p>
- <a href="https://losclandestinos.turbopos.es/" class="cta-banner__btn" data-i18n="cta-btn">
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
-   ${t['cta-btn'] || '¡PIDE AHORA!'}
-</a>
+    <p class="cta-banner__sub" data-i18n="cta-sub">${t['cta-sub'] || 'Pide online y disfruta de los mejores ingredientes italianos esta noche.'}</p>
+    <a href="https://losclandestinos.turbopos.es/" target="_blank" rel="noopener" class="cta-banner__btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span data-i18n="cta-btn">${t['cta-btn'] || '¡PIDE AHORA!'}</span>
+    </a>
   `;
   lastRow.insertAdjacentElement('afterend', banner);
+}
+
+let newsItems = [];
+let hoursData = null;
+
+async function initNews() {
+  const section = document.getElementById('news');
+  const list = document.getElementById('newsList');
+  if (!section || !list) return;
+
+  try {
+    const response = await fetch('data/novedades.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    if (!Array.isArray(data)) return;
+
+    const today = getLocalIsoDate();
+    newsItems = data
+      .filter(item => isValidNewsItem(item, today))
+      .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0) || a.id.localeCompare(b.id));
+    renderNews();
+  } catch (error) {
+    section.hidden = true;
+  }
+}
+
+function getLocalIsoDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function isValidIsoDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00`);
+  return !Number.isNaN(date.getTime()) && getDateParts(date) === value;
+}
+
+function getDateParts(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function isValidNewsItem(item, today) {
+  if (!item || item.active !== true || typeof item.id !== 'string' || !item.id.trim()) return false;
+  if (!item.content || !item.content.es || !item.content.en) return false;
+  if (!item.content.es.title || !item.content.en.title) return false;
+  if (item.startDate !== null && item.startDate !== undefined && !isValidIsoDate(item.startDate)) return false;
+  if (item.endDate !== null && item.endDate !== undefined && !isValidIsoDate(item.endDate)) return false;
+  if (item.startDate && item.endDate && item.startDate > item.endDate) return false;
+  if (item.startDate && today < item.startDate) return false;
+  if (item.endDate && today > item.endDate) return false;
+  return true;
+}
+
+function isSafeNewsLink(value) {
+  if (typeof value !== 'string' || !value.trim()) return false;
+  try {
+    const url = new URL(value, window.location.href);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch (error) {
+    return false;
+  }
+}
+
+function renderNews() {
+  const section = document.getElementById('news');
+  const list = document.getElementById('newsList');
+  if (!section || !list) return;
+
+  list.replaceChildren();
+  if (!newsItems.length) {
+    section.hidden = true;
+    return;
+  }
+
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
+  newsItems.forEach(item => list.appendChild(createNewsArticle(item, lang)));
+  section.hidden = false;
+}
+
+function createNewsArticle(item, lang) {
+  const article = document.createElement('article');
+  const images = Array.isArray(item.images)
+    ? item.images.filter(image => image && typeof image.src === 'string' && image.src.trim()).slice(0, 2)
+    : [];
+  article.className = `news-card news-card--images-${images.length}`;
+
+  if (images[0]) article.appendChild(createNewsImage(images[0], lang));
+
+  const content = item.content[lang] || item.content.es;
+  const copy = document.createElement('div');
+  copy.className = 'news-card__copy';
+
+  if (content.subtitle) {
+    const subtitle = document.createElement('p');
+    subtitle.className = 'news-card__subtitle';
+    subtitle.textContent = content.subtitle;
+    copy.appendChild(subtitle);
+  }
+
+  const title = document.createElement('h3');
+  title.className = 'news-card__title';
+  title.textContent = content.title;
+  copy.appendChild(title);
+
+  if (content.description) {
+    const description = document.createElement('p');
+    description.className = 'news-card__description';
+    description.textContent = content.description;
+    copy.appendChild(description);
+  }
+
+  const ctaLabel = item.cta && item.cta.label && (item.cta.label[lang] || item.cta.label.es);
+  if (item.cta && item.cta.active === true && ctaLabel && isSafeNewsLink(item.cta.url)) {
+    const link = document.createElement('a');
+    link.className = 'news-card__cta';
+    link.href = item.cta.url;
+    link.textContent = ctaLabel;
+    if (new URL(item.cta.url, window.location.href).origin !== window.location.origin) {
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
+    copy.appendChild(link);
+  }
+
+  article.appendChild(copy);
+  if (images[1]) article.appendChild(createNewsImage(images[1], lang));
+  return article;
+}
+
+function createNewsImage(image, lang) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'news-card__image';
+  const img = document.createElement('img');
+  img.src = image.src;
+  img.alt = image.alt && (image.alt[lang] || image.alt.es || image.alt.en) || '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  wrapper.appendChild(img);
+  return wrapper;
+}
+
+/* =============================================
+   OPENING HOURS — Load from JSON and render
+   ============================================= */
+
+const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const dayLabels = {
+  es: { monday: 'Lunes', tuesday: 'Martes', wednesday: 'Miércoles', thursday: 'Jueves', friday: 'Viernes', saturday: 'Sábado', sunday: 'Domingo' },
+  en: { monday: 'Monday', tuesday: 'Tuesday', wednesday: 'Wednesday', thursday: 'Thursday', friday: 'Friday', saturday: 'Saturday', sunday: 'Sunday' }
+};
+const slotHeaders = {
+  es: { day: 'Día', lunch: 'Pranzo', dinner: 'Cena' },
+  en: { day: 'Day', lunch: 'Lunch', dinner: 'Dinner' }
+};
+
+async function initHorarios() {
+  await loadHorarios();
+  renderHorarios(getCurrentLang());
+}
+
+async function loadHorarios() {
+  try {
+    const response = await fetch('data/horarios.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    if (!data || typeof data.weekly !== 'object' || Array.isArray(data.weekly)) return;
+    const valid = dayOrder.every(day => {
+      const d = data.weekly[day];
+      return d && typeof d.lunch_start === 'string' && typeof d.lunch_end === 'string' && typeof d.dinner_start === 'string' && typeof d.dinner_end === 'string';
+    });
+    if (!valid) return;
+    hoursData = data;
+  } catch (error) {
+    hoursData = null;
+  }
+}
+
+function getCurrentLang() {
+  return document.documentElement.lang === 'en' ? 'en' : 'es';
+}
+
+function to12h(time) {
+  if (!time || !time.includes(':')) return time;
+  const [h, m] = time.split(':').map(Number);
+  const suffix = h >= 12 ? 'pm' : 'am';
+  const h12 = h % 12 || 12;
+  return m ? `${h12}:${String(m).padStart(2, '0')}${suffix}` : `${h12}${suffix}`;
+}
+
+function formatSlot(start, end, lang) {
+  if (!start || !end || typeof start !== 'string' || typeof end !== 'string' || !start.trim() || !end.trim()) return null;
+  const sep = '–';
+  const s = start.trim();
+  const e = end.trim();
+  if (lang === 'en') {
+    return `<span class="time-slot"><span class="time-start">${to12h(s)}</span><span class="time-sep">${sep}</span><span class="time-end">${to12h(e)}</span></span>`;
+  }
+  return `${s}${sep}${e}`;
+}
+
+function closedLabel(lang) {
+  return lang === 'en' ? 'Closed' : 'Cerrado';
+}
+
+function renderHorarios(lang) {
+  if (!hoursData) return;
+  const roots = document.querySelectorAll('[data-hours-root]');
+  const fallbacks = document.querySelectorAll('[data-i18n="loc-hours-text"]');
+
+  roots.forEach(root => {
+    root.innerHTML = buildHoursHTML(hoursData, lang);
+    root.hidden = false;
+  });
+
+  fallbacks.forEach(fb => { fb.hidden = true; });
+}
+
+function buildHoursHTML(data, lang) {
+  const labels = dayLabels[lang] || dayLabels.es;
+  const headers = slotHeaders[lang] || slotHeaders.es;
+  const closed = closedLabel(lang);
+  const hasLunch = dayOrder.some(day => {
+    const d = data.weekly[day];
+    return d.lunch_start.trim() && d.lunch_end.trim();
+  });
+  const hasDinner = dayOrder.some(day => {
+    const d = data.weekly[day];
+    return d.dinner_start.trim() && d.dinner_end.trim();
+  });
+
+  let html = '<table class="hours-table">';
+  html += '<thead><tr>';
+  html += `<th>${escapeHtml(headers.day)}</th>`;
+  if (hasLunch) html += `<th>${escapeHtml(headers.lunch)}</th>`;
+  if (hasDinner) html += `<th>${escapeHtml(headers.dinner)}</th>`;
+  html += '</tr></thead><tbody>';
+
+  dayOrder.forEach(day => {
+    const d = data.weekly[day];
+    html += '<tr>';
+    html += `<td>${escapeHtml(labels[day])}</td>`;
+    if (hasLunch) {
+      const slot = formatSlot(d.lunch_start, d.lunch_end, lang);
+      html += `<td>${slot ? slot : escapeHtml(closed)}</td>`;
+    }
+    if (hasDinner) {
+      const slot = formatSlot(d.dinner_start, d.dinner_end, lang);
+      html += `<td>${slot ? slot : escapeHtml(closed)}</td>`;
+    }
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  return html;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 /* =============================================
@@ -740,26 +1008,29 @@ function initWithoutGSAP() {
   initWordSwitcher();
   initCocktailCarousel();
   initFallbackImages();
-  initLangSwitcher();
-  initLogoColorSwitch();
   // Basic pizza orbit with vanilla JS
   const pizzas = ['#p1','#p2','#p3','#p4','#p5'];
   const hero = document.getElementById('hero');
+  if (!hero) return;
   const radii = [38, 42, 36, 40, 44];
   const sizes = [220, 180, 260, 200, 150];
   const speeds = [0.000072, 0.000088, 0.000060, 0.000080, 0.000100]; // 60% slower
   const offsets = [0, 72, 144, 216, 288];
 
   function animate(ts) {
+    const hw = hero.offsetWidth;
+    const hh = hero.offsetHeight;
     pizzas.forEach((sel, i) => {
       const el = document.querySelector(sel);
       if (!el) return;
       const angle = (offsets[i] + ts * speeds[i] * 1000) * Math.PI / 180;
-      const hw = hero.offsetWidth, hh = hero.offsetHeight;
       const rx = (hw * radii[i] / 100) * 1.1;
       const ry = (hh * radii[i] / 100) * 0.7;
-      el.style.left = (hw/2 + rx * Math.cos(angle) - sizes[i]/2) + 'px';
-      el.style.top  = (hh/2 + ry * Math.sin(angle) - sizes[i]/2) + 'px';
+      const sizeW = el.offsetWidth;
+      const sizeH = el.offsetHeight;
+      const x = hw / 2 + rx * Math.cos(angle) - sizeW / 2;
+      const y = hh / 2 + ry * Math.sin(angle) - sizeH / 2;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     });
     requestAnimationFrame(animate);
   }
@@ -773,19 +1044,24 @@ const i18n = {
   es: {
     'nav-order':          'PIDE AHORA',
     'nav-products':       'NUESTROS PRODUCTOS',
+    'nav-home':           'INICIO',
     'hero-static':        'QUÉ GANAS DE',
+    'hero-order':         'HAZ TU PEDIDO',
+    'hero-call-prefix':   'o llámanos al',
+    'news-eyebrow':       'Novedades · Novità',
+    'news-title':         'LO NUEVO EN LOS CLANDESTINOS',
     'word-0':             'JAMÓN',
     'word-1':             'QUESO',
     'word-2':             'ANCHOAS',
-    'label-refugio-text': 'NUEVA PIZZA REFUGIO',
-    'about-eyebrow':      'La Línea · Desde 2023',
+    'word-3':             'PIZZA',
+    'about-eyebrow':      'La Línea · Desde 2020',
     'about-body-1':       'Los Clandestinos nace de la amistad y del deseo de crear algo especial entre La Línea de la Concepción y la comunidad fronteriza de Gibraltar. Un proyecto marcado por la frontera, el Brexit y la pandemia, donde encontramos en la pizza una forma de unir culturas y seguir adelante.',
     'about-body-2':       'Nuestras raíces vienen de Abruzzo, una tierra con un ritmo de vida muy cercano al andaluz: pasión por la buena comida, respeto por los tiempos y amor por los ingredientes. Ese saber hacer se traduce en cada detalle: la fermentación de la masa, la selección de harinas y los aceites de oliva de Málaga.',
     'about-body-3':       'Porque las recetas más sencillas son las que cuentan las mejores historias.',
     'tag-0':              'Horno de piedra',
     'tag-1':              'Masa artesanal',
     'tag-2':              'Ingredientes DOP',
-    'tag-3':              'Abierto desde 2023',
+    'tag-3':              'Abierto desde 2020',
     'products-eyebrow':   'Dal forno · Desde el horno',
     'prod-1-desc':        'Prosciutto di Parma que se deshace en la boca, mozzarella di bufala de cremosidad delicada, rúcula fresca con su punto amargo justo, y tomates cherry que estallan dulcemente en cada bocado.',
     'prod-2-desc':        'Capas de pasta fresca, ragú de cocción lenta y bechamel cremosa. La lasaña como debe ser: generosa, honesta y sin atajos. El plato que te reconcilia con el mundo.',
@@ -797,14 +1073,11 @@ const i18n = {
     'cocktail-2-desc':    'Gin, Campari, vermut rojo. Amargo, elegante, sin compromiso.',
     'cocktail-3-desc':    'Campari, vermut rojo, soda. Refrescante y con carácter italiano.',
     'cocktail-4-desc':    'Vodka, licor de café, espresso doble. El final perfecto de la noche.',
-    'reviews-eyebrow':    'Reseñas · Rankings',
-    'reviews-title':      'Valorada por quienes siempre vuelven',
-    'reviews-google':     'Ranking Google',
-    'reviews-justeat':    'Ranking Just Eat',
+    'reviews-title':      'valoraciones entre<br>Google y Just Eat',
     'footer-find-us':     'Encuéntranos',
     'footer-hours':       'Horario',
     'footer-mon-tue':     'Lun: Cerrado',
-    'footer-wed-sun':     'Dom / Jue–Sáb: 13:00–15:30, 19:30–23:30 · Mar: 19:00–23:00 · Mié: 19:30–23:30',
+    'footer-wed-sun':     'Mar–Dom: 19:30–23:30',
     'footer-closed':      'Cerrado',
     'footer-cta':         'PIDE AHORA',
     'footer-bottom':      '© 2026 Los Clandestinos Pizzería Italiana · Calle Carboneros 5, La Línea',
@@ -812,9 +1085,10 @@ const i18n = {
     'loc-eyebrow':        'Encuéntranos · Find Us',
     'loc-addr-label':     'Dirección',
     'loc-hours-label':    'Horario',
-    'loc-hours-text':     'Dom: 13:00–15:30, 19:30–23:30<br>Lun: Cerrado<br>Mar: 19:00–23:00<br>Mié: 19:30–23:30<br>Jue: 13:00–15:30, 19:30–23:30<br>Vie: 13:00–15:30, 19:30–23:30<br>Sáb: 13:00–15:30, 19:30–23:30',
     'loc-contact-label':  'Teléfono',
     'loc-social-label':   'Instagram',
+    'loc-facebook-label': 'Facebook',
+    'loc-facebook-link':  'Síguenos en Facebook',
     'loc-btn-call':       'Llamar ahora',
     'loc-btn-maps':       'Cómo llegar',
     'loc-btn-insta':      'Instagram',
@@ -839,24 +1113,30 @@ const i18n = {
     'cta-title':          '¿Listo para saborear la autenticidad?',
     'cta-sub':            'Llámanos y disfruta de los mejores ingredientes italianos esta noche.',
     'cta-btn':            '¡PIDE AHORA!',
-    'page-title':         'Ingredientes Italianos DOP para Pizza | Los Clandestinos, La Línea',
+    'page-title-home':    'Pizzería Italiana en La Línea de la Concepción | Los Clandestinos',
+    'page-title-products':'Ingredientes Italianos DOP para Pizza | Los Clandestinos, La Línea',
   },
   en: {
     'nav-order':          'ORDER ONLINE',
     'nav-products':       'OUR PRODUCTS',
+    'nav-home':           'HOME',
     'hero-static':        'CRAVING SOME',
+    'hero-order':         'ORDER NOW',
+    'hero-call-prefix':   'or call us at',
+    'news-eyebrow':       'News · Novità',
+    'news-title':         'WHAT’S NEW AT LOS CLANDESTINOS',
     'word-0':             'HAM',
     'word-1':             'CHEESE',
     'word-2':             'ANCHOVIES',
-    'label-refugio-text': 'OUR NEW PIZZA REFUGIO',
-    'about-eyebrow':      'La Línea · Since 2023',
+    'word-3':             'PIZZA',
+    'about-eyebrow':      'La Línea · Since 2020',
     'about-body-1':       'Los Clandestinos was born from friendship and the desire to create something special between La Línea de la Concepción and the border community of Gibraltar. A project shaped by the border, Brexit, and the pandemic—where we found in pizza a way to bring cultures together and keep moving forward.',
     'about-body-2':       'Our roots come from Abruzzo, a land with a rhythm of life close to Andalusia: passion for good food, respect for time, and love for ingredients. That know-how shows up in every detail: dough fermentation, flour selection, and olive oils from Málaga.',
     'about-body-3':       'Because the simplest recipes are the ones that tell the best stories.',
     'tag-0':              'Stone oven',
     'tag-1':              'Artisan dough',
     'tag-2':              'DOP ingredients',
-    'tag-3':              'Open since 2023',
+    'tag-3':              'Open since 2020',
     'products-eyebrow':   'Dal forno · From the oven',
     'prod-1-desc':        'Prosciutto di Parma, fior di latte mozzarella, fresh rocket, cherry tomatoes.',
     'prod-2-desc':        'Slow-cooked bolognese ragù, homemade béchamel, parmigiano reggiano DOP, oven-baked.',
@@ -868,14 +1148,11 @@ const i18n = {
     'cocktail-2-desc':    'Gin, Campari, red vermouth. Bitter, elegant, uncompromising.',
     'cocktail-3-desc':    'Campari, red vermouth, soda. Refreshing with real Italian character.',
     'cocktail-4-desc':    'Vodka, coffee liqueur, double espresso. The perfect end of the night.',
-    'reviews-eyebrow':    'Reviews · Rankings',
-    'reviews-title':      'Rated by the people who come back',
-    'reviews-google':     'Google ranking',
-    'reviews-justeat':    'Just Eat ranking',
+    'reviews-title':      'reviews between<br>Google and Just Eat',
     'footer-find-us':     'Find Us',
     'footer-hours':       'Hours',
     'footer-mon-tue':     'Mon: Closed',
-    'footer-wed-sun':     'Sun / Thu–Sat: 1:00–3:30 pm, 7:30–11:30 pm · Tue: 7:00–11:00 pm · Wed: 7:30–11:30 pm',
+    'footer-wed-sun':     'Tue–Sun: 7:30–11:30 pm',
     'footer-closed':      'Closed',
     'footer-cta':         'ORDER NOW',
     'footer-bottom':      '© 2026 Los Clandestinos Italian Pizzeria · Calle Carboneros 5, La Línea',
@@ -883,9 +1160,10 @@ const i18n = {
     'loc-eyebrow':        'Find Us · Encuéntranos',
     'loc-addr-label':     'Address',
     'loc-hours-label':    'Opening Hours',
-    'loc-hours-text':     'Sun: 1–3:30 pm, 7:30–11:30 pm<br>Mon: Closed<br>Tue: 7–11 pm<br>Wed: 7:30–11:30 pm<br>Thu: 1–3:30 pm, 7:30–11:30 pm<br>Fri: 1–3:30 pm, 7:30–11:30 pm<br>Sat: 1–3:30 pm, 7:30–11:30 pm',
     'loc-contact-label':  'Phone',
     'loc-social-label':   'Instagram',
+    'loc-facebook-label': 'Facebook',
+    'loc-facebook-link':  'Follow us on Facebook',
     'loc-btn-call':       'Call now',
     'loc-btn-maps':       'Get directions',
     'loc-btn-insta':      'Instagram',
@@ -910,7 +1188,8 @@ const i18n = {
     'cta-title':          'Ready to taste authenticity?',
     'cta-sub':            'Call us and enjoy the finest Italian ingredients tonight.',
     'cta-btn':            'ORDER NOW!',
-    'page-title':         'Italian DOP Pizza Ingredients | Los Clandestinos, La Línea',
+    'page-title-home':    'Italian Pizzeria in La Línea de la Concepción | Los Clandestinos',
+    'page-title-products':'Italian DOP Pizza Ingredients | Los Clandestinos, La Línea',
   }
 };
 
@@ -919,7 +1198,8 @@ function setLang(lang) {
   try { localStorage.setItem('lc-lang', lang); } catch(e) {}
   document.documentElement.lang = lang;
   // Update page title if a translation exists
-  const titleVal = i18n[lang]['page-title'];
+  const page = document.body.dataset.page === 'products' ? 'products' : 'home';
+  const titleVal = i18n[lang][`page-title-${page}`];
   if (titleVal) document.title = titleVal;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -944,6 +1224,9 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('lang-btn--active', btn.dataset.lang === lang);
   });
+
+  renderNews();
+  renderHorarios(lang);
 }
 
 function initLangSwitcher() {
@@ -955,4 +1238,33 @@ function initLangSwitcher() {
   });
 
   setLang(saved);
+}
+
+/* =============================================
+   LAZY MAP LOADING
+   The Google Maps iframe is only given its src when
+   the contact section scrolls into view.
+   ============================================= */
+function initLazyMap() {
+  const frame = document.getElementById('mapFrame');
+  if (!frame) return;
+  if (frame.src && frame.src !== window.location.href) return;
+
+  const loadMap = () => {
+    if (frame.src && frame.src !== window.location.href) return;
+    frame.src = frame.dataset.src;
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      loadMap();
+      obs.disconnect();
+    });
+  }, { rootMargin: '200px 0px', threshold: 0 });
+
+  observer.observe(frame);
+
+  // Safety net: load the map anyway after a short delay
+  setTimeout(loadMap, 1000);
 }
