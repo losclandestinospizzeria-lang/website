@@ -1,0 +1,69 @@
+/* === BASE RESET & TOKENS === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Brand Palette — Los Clandestinos */
+  --red:       #C8202A;   /* hero red background */
+  --red-dark:  #9B1219;
+  --cream:     #F2EAD8;   /* beige/cream sections */
+  --green:     #2D7A3A;   /* accent green */
+  --green-mid: #3A9B4A;
+  --black:     #0F0F0E;
+  --white:     #FFFFFF;
+  --dark-bg:   #1A1816;   /* footer */
+
+  /* Type scale (fluid) */
+  --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
+  --text-xl:   clamp(1.75rem, 1.2rem + 1.5vw, 3rem);
+  --text-2xl:  clamp(2.5rem, 1rem + 4vw, 6rem);
+  --text-hero: clamp(3.5rem, 0.5rem + 9vw, 12rem);
+
+  /* Spacing */
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: var(--font-body, 'Work Sans', sans-serif);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Zero out any accidental gaps between sections */
+section, footer, nav {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img, video { display: block; max-width: 100%; height: auto; }
+/* Suppress alt text on broken images */
+.pizza-item img { color: transparent; font-size: 0; }
+.marquee-bg-photos img, .crunch-bg img, .footer__bg img, .crunch-board img, .wood-panel img { color: transparent; font-size: 0; }
+button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
