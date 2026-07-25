@@ -22,7 +22,7 @@ Baseline captured on 2026-07-21 against the homepage served locally at `http://1
 - Desktop performance is primarily limited by layout shift.
 - Accessibility failures include prohibited ARIA attributes, color contrast, and the absence of a main landmark; mobile also reports undersized touch targets.
 - Lighthouse reported no browser console errors.
-- All 34 relative asset references found in `index.html` and `productos.html` resolve locally.
+- All 34 relative asset references found in `docs/index.html` and `docs/productos.html` resolve locally.
 
 ## Reports
 

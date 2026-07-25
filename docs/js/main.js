@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLogoColorSwitch();
 
   // Set up the map observer after the first paint, like Gusto
-  requestAnimationFrame(initLazyMap);
 
   // Wait for GSAP to load (deferred scripts)
   const waitForGSAP = setInterval(() => {
@@ -1238,33 +1237,4 @@ function initLangSwitcher() {
   });
 
   setLang(saved);
-}
-
-/* =============================================
-   LAZY MAP LOADING
-   The Google Maps iframe is only given its src when
-   the contact section scrolls into view.
-   ============================================= */
-function initLazyMap() {
-  const frame = document.getElementById('mapFrame');
-  if (!frame) return;
-  if (frame.src && frame.src !== window.location.href) return;
-
-  const loadMap = () => {
-    if (frame.src && frame.src !== window.location.href) return;
-    frame.src = frame.dataset.src;
-  };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      loadMap();
-      obs.disconnect();
-    });
-  }, { rootMargin: '200px 0px', threshold: 0 });
-
-  observer.observe(frame);
-
-  // Safety net: load the map anyway after a short delay
-  setTimeout(loadMap, 1000);
 }

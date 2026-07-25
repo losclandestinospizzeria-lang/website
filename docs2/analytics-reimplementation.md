@@ -11,7 +11,7 @@ Il tracking è intenzionalmente disabilitato. Questa guida documenta come ripris
 
 ## Configurazione
 
-Creare `js/analytics-config.js`:
+Creare `docs/js/analytics-config.js`:
 
 ```javascript
 window.LC_ANALYTICS = {
@@ -20,7 +20,7 @@ window.LC_ANALYTICS = {
 };
 ```
 
-Caricarlo prima di `js/main.js` in `index.html` e `productos.html`:
+Caricarlo prima di `docs/js/main.js` in `docs/index.html` e `docs/productos.html`:
 
 ```html
 <script src="js/analytics-config.js"></script>
@@ -29,7 +29,7 @@ Caricarlo prima di `js/main.js` in `index.html` e `productos.html`:
 
 ## Loader condizionale
 
-Richiamare `initAnalytics()` all’avvio e aggiungere a `js/main.js`:
+Richiamare `initAnalytics()` all’avvio e aggiungere a `docs/js/main.js`:
 
 ```javascript
 function initAnalytics() {

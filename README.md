@@ -38,7 +38,7 @@ Los Clandestinos is an artisan pizzeria near Gibraltar. The website presents:
 - Cocktail bar menu.
 - Customer ratings / social proof.
 - Location, opening hours, phone, Instagram and Google Maps.
-- A dedicated product page (`productos.html`) showcasing imported Italian ingredients.
+- A dedicated product page (`docs/productos.html`) showcasing imported Italian ingredients.
 
 All text content is bilingual. The language switcher lives in the top navigation and stores the user's preference in `localStorage`.
 
@@ -48,13 +48,13 @@ All text content is bilingual. The language switcher lives in the top navigation
 
 | Layer | Technology |
 |-------|------------|
-| Markup | Plain HTML5 (`index.html`, `productos.html`) |
-| Styling | CSS3 with custom properties (`css/base.css`, `css/style.css`) |
+| Markup | Plain HTML5 (`docs/index.html`, `docs/productos.html`) |
+| Styling | CSS3 with custom properties (`docs/css/base.css`, `docs/css/style.css`) |
 | Fonts | Google Fonts: Work Sans, Bebas Neue |
 | Animation | GSAP 3 + ScrollTrigger (loaded from CDN) |
-| Interactivity | Vanilla JavaScript (`js/main.js`) |
+| Interactivity | Vanilla JavaScript (`docs/js/main.js`) |
 | Hosting | GitHub Pages |
-| Custom domain | `CNAME` file + DNS records |
+| Custom domain | `docs/CNAME` file + DNS records |
 
 No build step, no framework, no package manager. This keeps the project easy to maintain and cheap to host.
 
@@ -64,31 +64,53 @@ No build step, no framework, no package manager. This keeps the project easy to 
 
 ```
 LosClandestinospizzeria/
-├── index.html              # Homepage
-├── productos.html          # Ingredients / products page
-├── CNAME                   # GitHub Pages custom domain
-├── robots.txt              # Search crawler instructions
-├── sitemap.xml             # Sitemap for search engines
-├── css/
-│   ├── base.css            # CSS reset, tokens, brand colours
-│   └── style.css           # All component and layout styles
-├── js/
-│   └── main.js             # Animations, language switcher, carousel, fallbacks
-└── images/                 # Photos, logos, favicons
+├── docs/                   # Public website (GitHub Pages source)
+│   ├── index.html          # Homepage
+│   ├── productos.html      # Ingredients / products page
+│   ├── CNAME               # GitHub Pages custom domain
+│   ├── robots.txt          # Search crawler instructions
+│   ├── sitemap.xml         # Sitemap for search engines
+│   ├── css/
+│   │   ├── base.css        # CSS reset, tokens, brand colours
+│   │   └── style.css       # All component and layout styles
+│   ├── js/
+│   │   └── main.js         # Animations, language switcher, carousel, fallbacks
+│   ├── data/
+│   │   ├── horarios.json   # Opening hours
+│   │   └── novedades.json  # News / promotions
+│   └── images/
+│       ├── web/            # Optimised images used by the website
+│       └──                 # Original / non-optimised assets (not referenced by the site)
+├── docs2/                  # Project documentation
+│   ├── analytics-reimplementation.md
+│   └── lighthouse-baseline.md
+├── scripts/
+│   └── serve.py            # Local development server
+├── utils/
+│   └── imageChanger/       # Image optimisation helpers
+├── README.md               # This file
+├── AI_CONTEXT.md           # AI assistant reference
+├── CONTRIBUTING.md         # Contribution guide
+└── CNAME                   # Copy of the custom domain (reference)
 ```
 
 ### Key files explained
 
-- **`index.html`** — landing page with hero, about, dishes, cocktails, reviews, location and footer.
-- **`productos.html`** — product/ingredients page (flours, olive oil, DOP cheeses, cured meats).
-- **`js/main.js`** — contains all interactivity and the bilingual `i18n` dictionary.
-- **`css/base.css`** — CSS custom properties for colours, typography and spacing.
-- **`css/style.css`** — all layout, component and responsive styles.
-- **`CNAME`** — tells GitHub Pages which custom domain to serve (`www.losclandestinospizzeria.es`).
-- **`sitemap.xml`** — list of public URLs for search engines.
-- **`robots.txt`** — allows all crawlers and points to the sitemap.
+- **`docs/index.html`** — landing page with hero, about, dishes, cocktails, reviews, location and footer.
+- **`docs/productos.html`** — product/ingredients page (flours, olive oil, DOP cheeses, cured meats).
+- **`docs/js/main.js`** — contains all interactivity and the bilingual `i18n` dictionary.
+- **`docs/css/base.css`** — CSS custom properties for colours, typography and spacing.
+- **`docs/css/style.css`** — all layout, component and responsive styles.
+- **`docs/CNAME`** — tells GitHub Pages which custom domain to serve (`www.losclandestinospizzeria.es`).
+- **`docs/sitemap.xml`** — list of public URLs for search engines.
+- **`docs/robots.txt`** — allows all crawlers and points to the sitemap.
+- **`docs/images/web/`** — optimised WebP images referenced by the website.
+- **`docs/images/`** — original / non-optimised assets kept for reference but not served.
+- **`docs2/`** — project documentation such as analytics plans and Lighthouse baselines.
 
-The pages load only `css/style.css` and `js/main.js`. The similarly named `style.css` and `main.js` files in the repository root are legacy copies and are not authoritative; do not edit them for website changes.
+The pages load only `docs/css/style.css` and `docs/js/main.js`.
+
+> **Note on `CNAME`:** Because GitHub Pages serves the `/docs` folder, the custom-domain file must be at `docs/CNAME`. The `CNAME` in the repository root is currently kept only as a reference copy.
 
 ---
 
@@ -102,7 +124,7 @@ source .venv/bin/activate
 python scripts/serve.py
 ```
 
-Then open `http://127.0.0.1:8000`. Use `Ctrl+C` to stop the server. The host and port can be changed when needed:
+Then open `http://127.0.0.1:8000/docs/` to preview the website. Use `Ctrl+C` to stop the server. The host and port can be changed when needed:
 
 ```bash
 python scripts/serve.py --host 0.0.0.0 --port 8080
@@ -115,15 +137,15 @@ Avoid opening the HTML files directly with `file://` because browser security ru
 Keep the Python server running and execute Lighthouse from another terminal. The first run can ask `npx` to download the Lighthouse CLI.
 
 ```bash
-npx --yes lighthouse http://127.0.0.1:8000/ --output html --output-path /tmp/los-clandestinos-lighthouse-mobile.html --chrome-flags="--headless"
-npx --yes lighthouse http://127.0.0.1:8000/ --preset desktop --output html --output-path /tmp/los-clandestinos-lighthouse-desktop.html --chrome-flags="--headless"
+npx --yes lighthouse http://127.0.0.1:8000/docs/ --output html --output-path /tmp/los-clandestinos-lighthouse-mobile.html --chrome-flags="--headless"
+npx --yes lighthouse http://127.0.0.1:8000/docs/ --preset desktop --output html --output-path /tmp/los-clandestinos-lighthouse-desktop.html --chrome-flags="--headless"
 ```
 
 The generated reports stay outside the repository in `/tmp`.
 
 ## Manage Novedades
 
-Homepage news is stored in `data/novedades.json`. The section stays hidden when the array is empty or no item is valid for the current local date.
+Homepage news is stored in `docs/data/novedades.json`. The section stays hidden when the array is empty or no item is valid for the current local date.
 
 ```json
 [
@@ -170,7 +192,7 @@ Use ISO dates in `YYYY-MM-DD` format. Both date boundaries are inclusive and use
 
 ## Analytics
 
-Analytics tracking is intentionally disabled: the site does not load Umami and does not attach analytics event attributes to TurboPOS or telephone links. See [`docs/analytics-reimplementation.md`](docs/analytics-reimplementation.md) for the reviewed event matrix, privacy requirements and reimplementation checklist.
+Analytics tracking is intentionally disabled: the site does not load Umami and does not attach analytics event attributes to TurboPOS or telephone links. See [`docs2/analytics-reimplementation.md`](docs2/analytics-reimplementation.md) for the reviewed event matrix, privacy requirements and reimplementation checklist.
 
 ---
 
@@ -179,9 +201,9 @@ Analytics tracking is intentionally disabled: the site does not load Umami and d
 The site is deployed with **GitHub Pages**:
 
 1. The repository `Albertohd88/LosClandestinospizzeria` is public on GitHub.
-2. In **Settings → Pages**, the source is set to deploy from the `main` branch (root folder `/`).
+2. In **Settings → Pages**, the source is set to deploy from the `main` branch `/docs` folder.
 3. GitHub builds and serves the static files at a `*.github.io` URL.
-4. The **`CNAME`** file in the repository root contains `www.losclandestinospizzeria.es`, so GitHub Pages serves the site from that custom domain.
+4. The **`docs/CNAME`** file contains `www.losclandestinospizzeria.es`, so GitHub Pages serves the site from that custom domain.
 5. The domain registrar has DNS records pointing to GitHub Pages:
    - **A records** for the apex domain (if used): `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - **CNAME record** for `www`: `<user>.github.io` (or the organisation name)
@@ -218,17 +240,17 @@ To move the project from one GitHub account (or organisation) to another, follow
 ### 3. Update DNS if the domain changes
 
 - If you are **keeping** `www.losclandestinospizzeria.es`, make sure the DNS CNAME for `www` points to the new GitHub Pages hostname (`<new-owner>.github.io`).
-- If you are **changing** the domain, update the DNS records for the new domain and edit the `CNAME` file accordingly.
+- If you are **changing** the domain, update the DNS records for the new domain and edit the `docs/CNAME` file accordingly.
 
 ### 4. Update hard-coded URLs in the project
 
 Search the repository for the old owner name and the old domain. Common places:
 
-- `CNAME` — custom domain.
-- `index.html` and `productos.html` — canonical links, Open Graph URLs, JSON-LD `@id`/`url`/`image`, favicon raw GitHub URLs.
-- `sitemap.xml` — `<loc>` URLs.
-- `robots.txt` — sitemap URL.
-- `js/main.js` — any absolute links or social URLs.
+- `docs/CNAME` — custom domain.
+- `docs/index.html` and `docs/productos.html` — canonical links, Open Graph URLs, JSON-LD `@id`/`url`/`image`, favicon raw GitHub URLs.
+- `docs/sitemap.xml` — `<loc>` URLs.
+- `docs/robots.txt` — sitemap URL.
+- `docs/js/main.js` — any absolute links or social URLs.
 
 After editing, commit and push to `main`. GitHub Pages will redeploy automatically.
 
@@ -245,12 +267,12 @@ After editing, commit and push to `main`. GitHub Pages will redeploy automatical
 
 The project already includes several best practices:
 
-- **Schema.org JSON-LD** in `index.html` describing the restaurant, address, phone, opening hours and social profiles.
+- **Schema.org JSON-LD** in `docs/index.html` describing the restaurant, address, phone, opening hours and social profiles.
 - **Open Graph** and **Twitter Cards** meta tags.
 - **Canonical URLs** on both pages.
-- **Sitemap** and **robots.txt**.
+- **Sitemap** (`docs/sitemap.xml`) and **robots.txt** (`docs/robots.txt`).
 - **Responsive design** with mobile breakpoints around `900px`.
-- **Reduced-motion** media query in `css/base.css`.
+- **Reduced-motion** media query in `docs/css/base.css`.
 - **ARIA labels** on navigation, language switcher, carousel and sections.
 - **Language switcher** stores preference in `localStorage` and updates `document.documentElement.lang`.
 

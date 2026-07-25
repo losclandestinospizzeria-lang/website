@@ -10,7 +10,7 @@ Use this file when an AI assistant (Cursor, Windsurf, ChatGPT, Claude, etc.) nee
 - **Type:** Static bilingual marketing website for a restaurant
 - **Location:** Calle Carboneros 5, La Línea de la Concepción, Cádiz, Spain
 - **Domain:** `www.losclandestinospizzeria.es`
-- **Hosted on:** GitHub Pages from the `main` branch
+- **Hosted on:** GitHub Pages from the `main` branch `/docs` folder
 - **Repo:** `https://github.com/Albertohd88/LosClandestinospizzeria`
 
 ---
@@ -19,15 +19,18 @@ Use this file when an AI assistant (Cursor, Windsurf, ChatGPT, Claude, etc.) nee
 
 | File | Responsibility |
 |------|----------------|
-| `index.html` | Homepage: hero, about, dishes, cocktails, reviews, location, footer |
-| `productos.html` | Product/ingredients page: flours, olive oil, DOP cheeses, cured meats |
-| `css/base.css` | CSS reset, design tokens, brand colours, fluid type scale |
-| `css/style.css` | All components, layout and responsive styles |
-| `js/main.js` | Animations, language switcher, carousel, fallback logic, i18n dictionary |
-| `CNAME` | GitHub Pages custom domain |
-| `sitemap.xml` | Search-engine sitemap |
-| `robots.txt` | Crawler instructions |
-| `images/` | Photos, logos, favicons |
+| `docs/index.html` | Homepage: hero, about, dishes, cocktails, reviews, location, footer |
+| `docs/productos.html` | Product/ingredients page: flours, olive oil, DOP cheeses, cured meats |
+| `docs/css/base.css` | CSS reset, design tokens, brand colours, fluid type scale |
+| `docs/css/style.css` | All components, layout and responsive styles |
+| `docs/js/main.js` | Animations, language switcher, carousel, fallback logic, i18n dictionary |
+| `docs/CNAME` | GitHub Pages custom domain |
+| `docs/sitemap.xml` | Search-engine sitemap |
+| `docs/robots.txt` | Crawler instructions |
+| `docs/images/web/` | Optimized images served by the website |
+| `docs/images/` | Original / non-optimised image assets (not referenced by the site) |
+| `docs2/` | Project documentation: analytics plan, Lighthouse baseline |
+| `README.md` / `AI_CONTEXT.md` / `CONTRIBUTING.md` | Root documentation for humans and AI assistants |
 
 No build step. No package manager. No framework.
 
@@ -41,7 +44,7 @@ No build step. No package manager. No framework.
 - **GSAP 3 + ScrollTrigger** loaded from jsDelivr CDN
 - **Google Fonts:** Work Sans, Bebas Neue
 - **Google Maps** embed
-- **Hosting:** GitHub Pages + custom domain via `CNAME`
+- **Hosting:** GitHub Pages + custom domain via `docs/CNAME` (root `CNAME` kept as reference)
 
 ---
 
@@ -56,7 +59,7 @@ No build step. No package manager. No framework.
 
 ### Preserve the brand
 
-- Brand colours are CSS custom properties in `css/base.css`:
+- Brand colours are CSS custom properties in `docs/css/base.css`:
   - `--red: #C8202A`
   - `--cream: #F2EAD8`
   - `--green: #2D7A3A`
@@ -66,20 +69,20 @@ No build step. No package manager. No framework.
 
 ### Preserve animations and fallbacks
 
-- GSAP animations live in `js/main.js` inside functions such as `initPizzaOrbit()`, `initWordSwitcher()`, `initProductSection()`.
+- GSAP animations live in `docs/js/main.js` inside functions such as `initPizzaOrbit()`, `initWordSwitcher()`, `initProductSection()`.
 - Always keep a non-GSAP fallback or graceful degradation.
 - Respect `prefers-reduced-motion`.
 
 ### Preserve i18n
 
 - Translatable elements have a `data-i18n="key"` attribute.
-- Translations live in the `i18n` object in `js/main.js`.
-- If you change text in HTML, also update both `i18n.es` and `i18n.en` unless the change is language-specific.
+- Translations live in the `i18n` object in `docs/js/main.js`.
+- If you change text in `docs/*.html`, also update both `i18n.es` and `i18n.en` in `docs/js/main.js` unless the change is language-specific.
 - HTML values with `<br>` or other markup should remain in the corresponding translation value.
 
 ### Keep SEO / accessibility intact
 
-- Do **not** remove the JSON-LD, Open Graph, canonical, sitemap, or `robots.txt` files.
+- Do **not** remove the JSON-LD, Open Graph, canonical, sitemap, or `docs/robots.txt` files.
 - Maintain `aria-label`, `role` and `sr-only` patterns.
 - Keep image `alt` attributes descriptive and locally relevant.
 
@@ -92,7 +95,7 @@ No build step. No package manager. No framework.
 - Facebook: `https://www.facebook.com/p/Los-Clandestinos-Pizzeria-Italiana-100057105144302/`
 - Google Maps: `https://www.google.com/maps/place/Pizzeria+Los+Clandestinos/@36.1606325,-5.3491208,17z`
 
-When any of these change, update every occurrence across `index.html`, `productos.html`, `js/main.js` and the JSON-LD block.
+When any of these change, update every occurrence across `docs/index.html`, `docs/productos.html`, `docs/js/main.js` and the JSON-LD block.
 
 ---
 
@@ -100,54 +103,54 @@ When any of these change, update every occurrence across `index.html`, `producto
 
 ### Change opening hours
 
-- Update `data/horarios.json`:
+- Update `docs/data/horarios.json`:
   - `weekly`: object with fixed keys `monday`…`sunday`, each with four fields: `lunch_start`, `lunch_end`, `dinner_start`, `dinner_end` (24h strings, e.g. `"12:30"`). Empty string = closed.
   - `schemaLd`: reference copy of the Schema.org `openingHoursSpecification` for Google.
 - The site combines the two 24h strings into a range (e.g. `"12:30–15:30"`), translates day names, and converts 24h times to 12h for English automatically.
-- Keep the fallback paragraph in `index.html` and `productos.html` in sync with the JSON (used when JS/fetch fails).
-- Update the static `openingHoursSpecification` JSON-LD in `index.html` whenever the effective hours change.
+- Keep the fallback paragraph in `docs/index.html` and `docs/productos.html` in sync with the JSON (used when JS/fetch fails).
+- Update the static `openingHoursSpecification` JSON-LD in `docs/index.html` whenever the effective hours change.
 - Exceptions/holidays are no longer managed dynamically; update the weekly JSON directly or the static JSON-LD.
 
 ### Change phone number
 
-- Search the entire project for the old number.
-- Update visible text, `tel:` links, JSON-LD `telephone`.
+- Search `docs/` for the old number.
+- Update visible text, `tel:` links and JSON-LD `telephone` in `docs/index.html`, `docs/productos.html` and `docs/js/main.js`.
 
 ### Change address or map
 
-- Update address text in both HTML files.
+- Update address text in both `docs/*.html` files.
 - Update the Google Maps iframe `src` and Google Maps link.
-- Update JSON-LD `address`, `geo` and `hasMap`.
+- Update JSON-LD `address`, `geo` and `hasMap` in `docs/index.html`.
 
 ### Add/change menu item
 
-- Edit the relevant `.product-row` in `index.html`.
-- Update the matching `prod-*` keys in `i18n.es` and `i18n.en`.
-- Add/replace the image in `images/` and update the `src`.
+- Edit the relevant `.product-row` in `docs/index.html`.
+- Update the matching `prod-*` keys in `i18n.es` and `i18n.en` in `docs/js/main.js`.
+- Add/replace the image in `docs/images/web/` and update the `src`.
 
 ### Add/change ingredient on product page
 
-- Edit the relevant `.product-row` in `productos.html`.
-- Update the matching `prod-p*` keys in `i18n.es` and `i18n.en`.
+- Edit the relevant `.product-row` in `docs/productos.html`.
+- Update the matching `prod-p*` keys in `i18n.es` and `i18n.en` in `docs/js/main.js`.
 
 ### Add a new language
 
-- Duplicate the `i18n.en` object in `js/main.js` with a new key (for example `fr`).
-- Add a new language button in the `<nav>` of every HTML page.
+- Duplicate the `i18n.en` object in `docs/js/main.js` with a new key (for example `fr`).
+- Add a new language button in the `<nav>` of every `docs/*.html` page.
 - Update `og:locale` and `html lang` logic if needed.
 
 ### Change the custom domain
 
-- Edit `CNAME`.
-- Update canonical links, Open Graph URLs, JSON-LD URLs and `sitemap.xml`.
+- Edit `docs/CNAME` (and the root `CNAME` if kept for reference).
+- Update canonical links, Open Graph URLs, JSON-LD URLs and `docs/sitemap.xml`.
 - Update DNS records.
 
 ---
 
 ## Deployment context
 
-- Pushing to `main` triggers GitHub Pages to rebuild and redeploy.
-- The `CNAME` file maps the custom domain.
+- Pushing to `main` triggers GitHub Pages to rebuild and redeploy from the `/docs` folder.
+- The `docs/CNAME` file maps the custom domain.
 - DNS must point to GitHub Pages:
   - Apex domain A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
   - `www` CNAME: `<owner>.github.io`
