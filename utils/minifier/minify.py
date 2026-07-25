@@ -143,7 +143,7 @@ def minify_css(css: str) -> str:
                 keep = (
                     (prev.isalnum() or prev in "_-")
                     and (nxt.isalnum() or nxt in "_-")
-                )
+                ) or prev in "+-" or nxt in "+-"
                 # Preserve spaces that separate CSS selector tokens
                 # (e.g. .parent .child, .parent .child, [attr] .child)
                 if nxt in ".#[:" or prev in ".#])":

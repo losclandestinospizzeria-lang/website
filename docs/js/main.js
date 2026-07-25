@@ -215,8 +215,6 @@ function initWordSwitcher() {
       prev.classList.add('hero__word--enter');
     }, 700);
   }
-
-  setInterval(cycle, INTERVAL);
 }
 
 /* =============================================

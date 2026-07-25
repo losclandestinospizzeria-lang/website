@@ -49,21 +49,26 @@ def inline_css_for(html_path: Path) -> None:
 
     # Remove all matching stylesheet links (fonts, base, page.min) and replace the
     # last one with the inline <style> block so the order stays in <head>.
-    link_matches = list(STYLESHEET_RE.finditer(html))
-    if not link_matches:
-        print(f"  unchanged {html_path.name}: no matching stylesheet links")
-        return
-
-    last_match = link_matches[-1]
-    before = html[: last_match.start()]
-    after = html[last_match.end() :]
-
-    # Remove earlier matched link tags from the part before the last match
-    for m in reversed(link_matches[:-1]):
-        before = before[: m.start()] + before[m.end() :]
-
     style_block = f"<style>{combined}</style>\n"
-    new_html = before.rstrip() + "\n  " + style_block + after.lstrip()
+    link_matches = list(STYLESHEET_RE.finditer(html))
+
+    if not link_matches:
+        # No stylesheet links (already inlined previously); insert before </head>.
+        head_close = html.lower().find("</head>")
+        if head_close == -1:
+            print(f"  unchanged {html_path.name}: no </head> found")
+            return
+        new_html = html[:head_close].rstrip() + "\n  " + style_block + "\n" + html[head_close:]
+    else:
+        last_match = link_matches[-1]
+        before = html[: last_match.start()]
+        after = html[last_match.end() :]
+
+        # Remove earlier matched link tags from the part before the last match
+        for m in reversed(link_matches[:-1]):
+            before = before[: m.start()] + before[m.end() :]
+
+        new_html = before.rstrip() + "\n  " + style_block + after.lstrip()
 
     html_path.write_text(new_html, encoding="utf-8")
     print(f"  inlined CSS into {html_path.name} ({len(combined)} bytes)")
