@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 *.py[cod]
 issues_overview_report.csv
+utils/imageChanger/backups/
+
