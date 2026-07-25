@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLogoColorSwitch();
 
   // Set up the map observer after the first paint, like Gusto
+  requestAnimationFrame(initLazyMap);
 
   // Wait for GSAP to load (deferred scripts)
   const waitForGSAP = setInterval(() => {
@@ -935,6 +936,27 @@ function initFallbackImages() {
       this.style.display = 'none';
     });
   });
+}
+
+/* =============================================
+   LAZY MAP LOADING
+   The Google Maps iframe is only given its src
+   when the location section scrolls into view.
+   Mirrors Gusto's implementation.
+   ============================================= */
+function initLazyMap() {
+  const frame = document.getElementById('mapFrame');
+  if (!frame) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      frame.src = frame.dataset.src;
+      obs.unobserve(frame);
+    });
+  }, { rootMargin: '100px 0px', threshold: 0 });
+
+  observer.observe(frame);
 }
 
 /* =============================================
