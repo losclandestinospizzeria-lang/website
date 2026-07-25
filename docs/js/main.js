@@ -459,8 +459,8 @@ function initLogoColorSwitch() {
   const navEl = document.querySelector('.nav');
   if (!logo) return;
 
-  const LOGO_WHITE = 'images/logo-white.svg';
-  const LOGO_RED   = 'images/logo-red.svg';
+  const LOGO_WHITE = 'images/web/logo-white.svg';
+  const LOGO_RED   = 'images/web/logo-red.svg';
 
   // Force white immediately — page always starts at the top (dark hero).
   logo.src = LOGO_WHITE;
@@ -896,15 +896,14 @@ function escapeHtml(text) {
    ============================================= */
 function initFallbackImages() {
   const gradients = {
-    'images/pizza1.jpg':      'radial-gradient(circle, #E8B84B 30%, #C8202A 70%, #8B1A1A 100%)',
-    'images/pizza2.jpg':      'radial-gradient(circle, #F5D78E 20%, #D4A030 50%, #9B6A20 100%)',
-    'images/pizza3.jpg':      'radial-gradient(circle, #FAC060 25%, #C84020 60%, #7A1810 100%)',
-    'images/pizza4.jpg':      'radial-gradient(circle, #E0C070 20%, #B83820 55%, #6A1010 100%)',
-    'images/pizza5.jpg':      'radial-gradient(circle, #F0D080 30%, #CC6020 65%, #882010 100%)',
-    'images/woodboard.jpg':   'linear-gradient(160deg, #8B6010 0%, #6A4808 60%, #4A3005 100%)',
-    'images/foodboard.jpg':   'linear-gradient(150deg, #7A5510 0%, #5A3808 60%, #3A2205 100%)',
-    'images/pizza-whole.jpg': 'radial-gradient(circle, #E8B84B 25%, #C8202A 55%, #8B1A1A 80%, #5A1010 100%)',
-    'images/pizzahands.jpg':  'linear-gradient(180deg, #1C1008 0%, #2A1810 50%, #1A0C04 100%)',
+    'images/web/pizza1-480.webp':       'radial-gradient(circle, #E8B84B 30%, #C8202A 70%, #8B1A1A 100%)',
+    'images/web/pizza2-480.webp':       'radial-gradient(circle, #F5D78E 20%, #D4A030 50%, #9B6A20 100%)',
+    'images/web/pizza3-480.webp':       'radial-gradient(circle, #FAC060 25%, #C84020 60%, #7A1810 100%)',
+    'images/web/pizza4-480.webp':       'radial-gradient(circle, #E0C070 20%, #B83820 55%, #6A1010 100%)',
+    'images/web/pizza5-480.webp':       'radial-gradient(circle, #F0D080 30%, #CC6020 65%, #882010 100%)',
+    'images/web/woodboard-480.webp':    'linear-gradient(160deg, #8B6010 0%, #6A4808 60%, #4A3005 100%)',
+    'images/web/foodboard-480.webp':    'linear-gradient(150deg, #7A5510 0%, #5A3808 60%, #3A2205 100%)',
+    'images/web/pizza-whole-480.webp':  'radial-gradient(circle, #E8B84B 25%, #C8202A 55%, #8B1A1A 80%, #5A1010 100%)',
   };
 
   document.querySelectorAll('img').forEach(img => {

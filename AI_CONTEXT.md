@@ -10,6 +10,7 @@ Use this file when an AI assistant (Cursor, Windsurf, ChatGPT, Claude, etc.) nee
 - **Type:** Static bilingual marketing website for a restaurant
 - **Location:** Calle Carboneros 5, La Línea de la Concepción, Cádiz, Spain
 - **Domain:** `www.losclandestinospizzeria.es`
+- **Domain registrar / DNS provider:** Hostinger
 - **Hosted on:** GitHub Pages from the `main` branch `/docs` folder
 - **Repo:** `https://github.com/Albertohd88/LosClandestinospizzeria`
 
@@ -56,6 +57,13 @@ No build step. No package manager. No framework.
 - Do **not** add a build tool (Webpack, Vite, Parcel, etc.) unless explicitly requested.
 - Do **not** add a CSS preprocessor unless explicitly requested.
 - Do **not** move files into a different folder structure unless asked.
+
+### Account for GitHub Pages hosting
+
+- Treat `docs/` as the production web root: files outside it are not published by GitHub Pages.
+- Keep production features fully static and browser-side. GitHub Pages cannot run server-side code, application servers, databases or private runtime environment variables.
+- Use URLs and asset paths that work when served by GitHub Pages through the custom domain, including its case-sensitive file paths.
+- Remember that pushing changes to `main` publishes the affected files in `docs/` to the live website automatically.
 
 ### Preserve the brand
 
@@ -151,6 +159,7 @@ When any of these change, update every occurrence across `docs/index.html`, `doc
 
 - Pushing to `main` triggers GitHub Pages to rebuild and redeploy from the `/docs` folder.
 - The `docs/CNAME` file maps the custom domain.
+- The domain and its DNS records are managed in Hostinger.
 - DNS must point to GitHub Pages:
   - Apex domain A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
   - `www` CNAME: `<owner>.github.io`
