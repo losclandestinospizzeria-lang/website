@@ -1153,8 +1153,8 @@ const i18n = {
     'cta-title':          '¿Listo para saborear la autenticidad?',
     'cta-sub':            'Llámanos y disfruta de los mejores ingredientes italianos esta noche.',
     'cta-btn':            '¡PIDE AHORA!',
-    'page-title-home':    'Pizzería Italiana en La Línea de la Concepción | Los Clandestinos',
-    'page-title-products':'Ingredientes Italianos DOP para Pizza | Los Clandestinos, La Línea',
+    'page-title-home':    'Pizzería Italiana Artesanal en La Línea | Los Clandestinos',
+    'page-title-products':'Ingredientes Italianos DOP para Pizza | Los Clandestinos',
   },
   en: {
     'nav-order':          'ORDER ONLINE',
@@ -1228,8 +1228,8 @@ const i18n = {
     'cta-title':          'Ready to taste authenticity?',
     'cta-sub':            'Call us and enjoy the finest Italian ingredients tonight.',
     'cta-btn':            'ORDER NOW!',
-    'page-title-home':    'Italian Pizzeria in La Línea de la Concepción | Los Clandestinos',
-    'page-title-products':'Italian DOP Pizza Ingredients | Los Clandestinos, La Línea',
+    'page-title-home':    'Italian Artisan Pizzeria in La Línea | Los Clandestinos',
+    'page-title-products':'Italian DOP Pizza Ingredients | Los Clandestinos',
   }
 };
 
