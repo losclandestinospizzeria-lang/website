@@ -1,33 +1,48 @@
 [
   {
-    "id": "identificador-unico",
+    "id": "pizza-maradona",
     "active": true,
-    "startDate": "2026-07-01",
-    "endDate": "2026-07-24",
+    "startDate": "2026-07-29",
+    "endDate": "2026-08-28",
     "order": 10,
     "images": [
       {
-        "src": "images/web/cocktail-americano-768.webp",
+        "src": "images/web/maradona1-480.webp",
+        "srcset": "images/web/maradona1-480.webp 480w, images/web/maradona1-768.webp 768w",
+        "sizes": "(max-width: 900px) calc(100vw - 3rem), 420px",
+        "width": 758,
+        "height": 1022,
         "alt": {
-          "es": "Cocktail americano",
-          "en": "American cocktail"
+          "es": "Pizza Maradona con mozzarella de búfala, jamón York, rúcula, tomates secos, aceitunas negras y pesto rojo.",
+          "en": "Maradona pizza with buffalo mozzarella, cooked ham, arugula, sun-dried tomatoes, black olives and red pesto."
+        }
+      },
+      {
+        "src": "images/web/maradona2-480.webp",
+        "srcset": "images/web/maradona2-480.webp 480w, images/web/maradona2-768.webp 768w",
+        "sizes": "(max-width: 900px) calc(100vw - 3rem), 420px",
+        "width": 757,
+        "height": 1024,
+        "alt": {
+          "es": "Pizza Maradona acompañada de una Birra Peroni Nastro Azzurro.",
+          "en": "Maradona pizza served with a Peroni Nastro Azzurro beer."
         }
       }
     ],
     "content": {
       "es": {
-        "title": "Nuevos Coctails",
-        "subtitle": "Desde la barra hasta a ti",
-        "description": "Nuestra nueva seleccion de cocktails te espera en el restaurante, pidelos en barra o te los llevamos a la mesa."
+        "title": "Pizza Maradona",
+        "subtitle": "Un homenaje a Nápoles en cada bocado.",
+        "description": "Nuestra Pizza Maradona reúne mozzarella de búfala, jamón York, rúcula fresca, tomates secos, aceitunas negras y pesto rojo sobre una base de masa artesanal cocinada al horno. Una combinación de sabores inspirada en la tradición italiana que puedes disfrutar sola o acompañada de una refrescante Birra Peroni Nastro Azzurro."
       },
       "en": {
-        "title": "New Cocktails",
-        "subtitle": "From the bar to your table",
-        "description": "Our new selection of cocktails is waiting for you at the restaurant, order them at the bar or we'll bring them to your table."
+        "title": "Maradona Pizza",
+        "subtitle": "A tribute to Naples in every bite.",
+        "description": "Our Maradona Pizza combines buffalo mozzarella, cooked ham, fresh arugula, sun-dried tomatoes, black olives and red pesto on our handcrafted wood-fired pizza base. A true taste of Italy, perfect on its own or paired with a refreshing Peroni Nastro Azzurro."
       }
     },
     "cta": {
-      "active": false,
+      "active": true,
       "url": "https://losclandestinos.turbopos.es/",
       "label": {
         "es": "Haz tu pedido",

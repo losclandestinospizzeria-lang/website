@@ -62,6 +62,7 @@ No build step. No package manager. No framework.
 
 - Treat `docs/` as the production web root: files outside it are not published by GitHub Pages.
 - Keep production features fully static and browser-side. GitHub Pages cannot run server-side code, application servers, databases or private runtime environment variables.
+- HTTP response headers such as `X-Content-Type-Options`, `Strict-Transport-Security`, `X-Frame-Options` and `Referrer-Policy` cannot be configured on plain GitHub Pages. The current best available countermeasures are the existing `<meta http-equiv="Content-Security-Policy">` and `<meta name="referrer" content="strict-origin-when-cross-origin">` tags in `docs/*.html`.
 - Use URLs and asset paths that work when served by GitHub Pages through the custom domain, including its case-sensitive file paths.
 - Remember that pushing changes to `main` publishes the affected files in `docs/` to the live website automatically.
 

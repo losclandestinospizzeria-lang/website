@@ -779,6 +779,10 @@ function createNewsImage(image, lang) {
   wrapper.className = 'news-card__image';
   const img = document.createElement('img');
   img.src = image.src;
+  if (image.srcset) img.srcset = image.srcset;
+  if (image.sizes) img.sizes = image.sizes;
+  if (image.width) img.width = image.width;
+  if (image.height) img.height = image.height;
   img.alt = image.alt && (image.alt[lang] || image.alt.es || image.alt.en) || '';
   img.loading = 'lazy';
   img.decoding = 'async';
@@ -1141,7 +1145,7 @@ const i18n = {
     'page-back':          '← Volver al inicio',
     'page-sec-eyebrow':   'Importado directamente · Straight from Italy',
     'prod-p1-title':      'Harina<br>Maestra',
-    'prod-p1-desc':       'La auténtica harina Pizzajuolo, aprobada por la AVPN (Associazione Verace Pizza Napoletana), realza las excelencias de la pizza napolitana, ofreciendo una corteza perfectamente desarrollada y dorada, una masa suave, elástica y fácilmente plegable, además de realzar el sabor de los ingredientes. como el tomate, la mozzarella y el aceite de oliva. Producido por la reconocida marca DallaGiovanna, es la elección favorita de los maestros pizzeros que buscan autenticidad y calidad para crear auténticas experiencias culinarias napolitanas.',
+    'prod-p1-desc':       'Harina Pizzajuolo aprobada por la AVPN. Corteza dorada, masa suave y elástica, y un sabor que realza el tomate, la mozzarella y el aceite. La elección de DallaGiovanna para pizzas napolitanas auténticas.',
     'prod-p2-title':      'Aceite<br>de Oliva Olvera',
     'prod-p2-desc':       'De la provincia de Málaga, con el carácter del sur. Prensado en frío, de cosecha propia, con una acidez mínima que realza sin tapar. El acabado perfecto para cualquier pizza o tabla — y la razón por la que el primer bocado siempre sorprende.',
     'prod-p3-title':      'Quesos<br>DOP',
@@ -1216,7 +1220,7 @@ const i18n = {
     'page-back':          '← Back to home',
     'page-sec-eyebrow':   'Imported directly · Straight from Italy',
     'prod-p1-title':      'Italian<br>Flours',
-    'prod-p1-desc':       'Type 00 and durum wheat semolina from Italian mills. The foundation of our perfect pizza: open crumb, light texture, unmistakable quality.',
+    'prod-p1-desc':       'Pizzajuolo flour approved by the AVPN. Golden crust, soft and elastic dough, and a flavour that lifts the tomato, mozzarella and olive oil. DallaGiovanna\'s choice for authentic Neapolitan pizzas.',
     'prod-p2-title':      'Olive<br>Oil Olvera',
     'prod-p2-desc':       'Single-varietal extra virgin olive oil from small producers in southern Italy. Intense, fruity, with the Mediterranean character every dish deserves.',
     'prod-p3-title':      'DOP<br>Cheeses',

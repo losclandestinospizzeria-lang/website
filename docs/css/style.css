@@ -546,6 +546,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   min-height: 48px;
   margin-top: 0.5rem;
   padding: 12px 28px;
@@ -1269,6 +1270,8 @@
   padding: clamp(3rem, 5vw, 6rem) clamp(2rem, 6vw, 8rem) 0;
 }
 .products-eyebrow {
+  display: block;
+  margin: 0;
   font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 700;
