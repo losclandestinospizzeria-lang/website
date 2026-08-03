@@ -3,7 +3,7 @@
     "id": "pizza-maradona",
     "active": true,
     "startDate": "2026-07-29",
-    "endDate": "2026-08-28",
+    "endDate": "2199-08-28",
     "order": 10,
     "images": [
       {
@@ -42,7 +42,7 @@
       }
     },
     "cta": {
-      "active": true,
+      "active": false,
       "url": "https://losclandestinos.turbopos.es/",
       "label": {
         "es": "Haz tu pedido",
