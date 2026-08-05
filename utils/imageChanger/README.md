@@ -62,7 +62,7 @@ Genera `<nome>-thumb.webp` (600px) per tutte le immagini di gallery in una direc
 Salta automaticamente: `logo*`, `external*`, `internal*`, `favicon*`, e file già con suffisso `-thumb`, `-480`, `-640`, `-960`.
 
 ```bash
-python convert_to_webp.py --gallery-thumbs <PICS_DIR>
+python convert_to_webp.py -gallery-thumbs <PICS_DIR>
 python convert_to_webp.py --gallery-thumbs ../../v2/assets/pics/
 ```
 
