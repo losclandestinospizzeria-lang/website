@@ -18,6 +18,7 @@ The site is intentionally simple: plain HTML, CSS and vanilla JavaScript. It is 
 - [SEO & accessibility notes](#seo--accessibility-notes)
 - [Credits & license](#credits--license)
 
+
 ---
 
 ## Live site
