@@ -42,7 +42,7 @@
       }
     },
     "cta": {
-      "active": false,
+      "active": true,
       "url": "https://losclandestinos.turbopos.es/",
       "label": {
         "es": "Haz tu pedido",
