@@ -7,9 +7,9 @@
     "monday": { "lunch_start": "", "lunch_end": "", "dinner_start": "", "dinner_end": "" },
     "tuesday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
     "wednesday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
-    "thursday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
-    "friday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
-    "saturday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" },
-    "sunday": { "lunch_start": "", "lunch_end": "", "dinner_start": "19:30", "dinner_end": "23:30" }
+    "thursday": { "lunch_start": "13:00", "lunch_end": "15:30", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "friday": { "lunch_start": "13:00", "lunch_end": "15:30", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "saturday": { "lunch_start": "13:00", "lunch_end": "15:30", "dinner_start": "19:30", "dinner_end": "23:30" },
+    "sunday": { "lunch_start": "13:00", "lunch_end": "15:30", "dinner_start": "19:30", "dinner_end": "23:30" }
   }
 }

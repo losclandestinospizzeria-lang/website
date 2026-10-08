@@ -796,7 +796,7 @@ const dayLabels = {
   en: { monday: 'Monday', tuesday: 'Tuesday', wednesday: 'Wednesday', thursday: 'Thursday', friday: 'Friday', saturday: 'Saturday', sunday: 'Sunday' }
 };
 const slotHeaders = {
-  es: { day: 'Día', lunch: 'Pranzo', dinner: 'Cena' },
+  es: { day: 'Día', lunch: 'Almuerzo', dinner: 'Cena' },
   en: { day: 'Day', lunch: 'Lunch', dinner: 'Dinner' }
 };
 
@@ -1117,7 +1117,7 @@ const i18n = {
     'footer-find-us':     'Encuéntranos',
     'footer-hours':       'Horario',
     'footer-mon-tue':     'Lun: Cerrado',
-    'footer-wed-sun':     'Mar–Dom: 19:30–23:30',
+    'footer-wed-sun':     'Mar–Mié: 19:30–23:30 · Jue–Dom: 13:00–15:30, 19:30–23:30',
     'footer-closed':      'Cerrado',
     'footer-cta':         'PIDE AHORA',
     'footer-bottom':      '© 2026 Los Clandestinos Pizzería Italiana · Calle Carboneros 5, La Línea',
@@ -1133,6 +1133,7 @@ const i18n = {
     'loc-btn-maps':       'Cómo llegar',
     'loc-btn-insta':      'Instagram',
     'loc-btn-order':      'PIDE AHORA',
+    'footer-credit':      'Hecho por <a href="https://rapidoybien.es/" target="_blank" rel="noopener">rapidoybien.es</a>',
     /* Productos page */
     'page-hero-title-1':  'NUESTROS',
     'page-hero-title-2':  'PRODUCTOS',
@@ -1192,7 +1193,7 @@ const i18n = {
     'footer-find-us':     'Find Us',
     'footer-hours':       'Hours',
     'footer-mon-tue':     'Mon: Closed',
-    'footer-wed-sun':     'Tue–Sun: 7:30–11:30 pm',
+    'footer-wed-sun':     'Tue–Wed: 7:30–11:30 pm · Thu–Sun: 1–3:30 pm, 7:30–11:30 pm',
     'footer-closed':      'Closed',
     'footer-cta':         'ORDER NOW',
     'footer-bottom':      '© 2026 Los Clandestinos Italian Pizzeria · Calle Carboneros 5, La Línea',
@@ -1208,6 +1209,7 @@ const i18n = {
     'loc-btn-maps':       'Get directions',
     'loc-btn-insta':      'Instagram',
     'loc-btn-order':      'ORDER NOW',
+    'footer-credit':      'Made by <a href="https://rapidoybien.es/" target="_blank" rel="noopener">rapidoybien.es</a>',
     /* Productos page */
     'page-hero-title-1':  'OUR',
     'page-hero-title-2':  'PRODUCTS',

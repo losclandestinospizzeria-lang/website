@@ -1256,6 +1256,25 @@
   letter-spacing: 0.08em;
 }
 
+.footer__credit {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin: 0;
+  padding: 0 clamp(2rem, 6vw, 7rem) 1.25rem;
+  font-size: 0.65rem;
+  color: rgba(237,228,211,0.5);
+  letter-spacing: 0.08em;
+}
+
+.footer__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__credit a:hover { color: var(--cream); }
+
 /* ============================================
    SECTION — PRODUCTS 2.0
    Cinematic full-bleed alternating rows
