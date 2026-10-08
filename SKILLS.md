@@ -1,6 +1,6 @@
 # Agent Skills
 
-Step-by-step procedures for the Hermes agent. Each skill is a complete checklist — the agent must execute **every** step before opening a PR.
+Step-by-step procedures. Each skill is a complete checklist — execute **every** step before committing.
 
 ---
 
@@ -47,7 +47,7 @@ Before writing any file, verify:
 
 5. **Update `loc-hours-text` i18n** values if they exist in `docs/js/main.js` (fallback for JS-off visitors).
 
-6. **Create branch** `hermes/update-hours-YYYY-MM-DD` and open PR.
+6. **Commit and push** to `main`.
 
 ---
 
@@ -150,6 +150,6 @@ If two images are provided, add a second object to the `images` array with the s
 - Alt texts must be descriptive and mention "Los Clandestinos, La Línea de la Concepción" when natural (per `CONTRIBUTING.md`).
 - No changes to `sitemap.xml` or `robots.txt` are needed for news updates.
 
-### Branch & PR
+### Commit
 
-Create branch `hermes/news-<id>` and open PR. PR description should include a preview of the proposed content in both languages.
+Commit and push to `main`.

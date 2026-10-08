@@ -92,8 +92,7 @@ LosClandestinospizzeria/
 ├── README.md               # This file
 ├── AI_CONTEXT.md           # AI assistant reference
 ├── CONTRIBUTING.md         # Contribution guide
-├── AGENT.md                # Hermes agent identity & constraints
-├── SKILLS.md               # Step-by-step agent skills (hours, news)
+├── SKILLS.md               # Step-by-step procedures (hours, news)
 └── CNAME                   # Copy of the custom domain (reference)
 ```
 
@@ -295,7 +294,4 @@ For contribution guidelines, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Agent workflows
 
-The repository includes structured instructions for the **Hermes** automation agent (Gemini LLM). The agent can update opening hours and the news section via pull requests.
-
-- [`AGENT.md`](AGENT.md) — agent identity, constraints, branch naming.
-- [`SKILLS.md`](SKILLS.md) — detailed procedures for each supported task.
+Step-by-step procedures for updating opening hours and the news section are in [`SKILLS.md`](SKILLS.md).

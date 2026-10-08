@@ -158,10 +158,7 @@ When any of these change, update every occurrence across `docs/index.html`, `doc
 
 ## Agent automation
 
-For automated (Hermes) workflows, see:
-
-- [`AGENT.md`](AGENT.md) — agent identity, constraints and PR conventions.
-- [`SKILLS.md`](SKILLS.md) — step-by-step procedures the agent follows for timetable and news updates.
+For automated workflows, see [`SKILLS.md`](SKILLS.md) — step-by-step procedures for timetable and news updates.
 
 ---
 
