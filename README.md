@@ -92,7 +92,6 @@ LosClandestinospizzeria/
 ├── README.md               # This file
 ├── AI_CONTEXT.md           # AI assistant reference
 ├── CONTRIBUTING.md         # Contribution guide
-├── SKILLS.md               # Step-by-step procedures (hours, news)
 └── CNAME                   # Copy of the custom domain (reference)
 ```
 
@@ -289,9 +288,3 @@ When adding new sections, preserve these patterns.
 - Animation library: GSAP by GreenSock.
 
 For contribution guidelines, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
-
----
-
-## Agent workflows
-
-Step-by-step procedures for updating opening hours and the news section are in [`SKILLS.md`](SKILLS.md).

@@ -156,12 +156,6 @@ When any of these change, update every occurrence across `docs/index.html`, `doc
 
 ---
 
-## Agent automation
-
-For automated workflows, see [`SKILLS.md`](SKILLS.md) — step-by-step procedures for timetable and news updates.
-
----
-
 ## Deployment context
 
 - Pushing to `main` triggers GitHub Pages to rebuild and redeploy from the `/docs` folder.
