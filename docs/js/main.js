@@ -1133,6 +1133,7 @@ const i18n = {
     'loc-btn-maps':       'Cómo llegar',
     'loc-btn-insta':      'Instagram',
     'loc-btn-order':      'PIDE AHORA',
+    'footer-terms':       'Términos y condiciones',
     'footer-credit':      'Hecho por <a href="https://rapidoybien.es/" target="_blank" rel="noopener">rapidoybien.es</a>',
     /* Productos page */
     'page-hero-title-1':  'NUESTROS',
@@ -1209,6 +1210,7 @@ const i18n = {
     'loc-btn-maps':       'Get directions',
     'loc-btn-insta':      'Instagram',
     'loc-btn-order':      'ORDER NOW',
+    'footer-terms':       'Terms and conditions',
     'footer-credit':      'Made by <a href="https://rapidoybien.es/" target="_blank" rel="noopener">rapidoybien.es</a>',
     /* Productos page */
     'page-hero-title-1':  'OUR',
