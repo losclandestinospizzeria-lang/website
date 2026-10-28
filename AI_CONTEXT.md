@@ -22,6 +22,7 @@ Use this file when an AI assistant (Cursor, Windsurf, ChatGPT, Claude, etc.) nee
 |------|----------------|
 | `docs/index.html` | Homepage: hero, about, dishes, cocktails, reviews, location, footer |
 | `docs/productos.html` | Product/ingredients page: flours, olive oil, DOP cheeses, cured meats |
+| `docs/terminos.html` | Terms and conditions page. **Generated** from `tec.md` by `utils/legal/build_terminos.py` — never edit by hand (see `docs2/adr/0001-terms-single-source.md`) |
 | `docs/css/base.css` | CSS reset, design tokens, brand colours, fluid type scale |
 | `docs/css/style.css` | All components, layout and responsive styles |
 | `docs/js/main.js` | Animations, language switcher, carousel, fallback logic, i18n dictionary |
